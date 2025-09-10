@@ -84,6 +84,7 @@ header .container {
     font-weight: 800;
     color: #e9ecef;
     font-family: 'Montserrat', 'Noto Sans JP', sans-serif; /* ロゴに近い雰囲気 */
+    gap: 12px; /* ロゴと会社名の間隔を少し広げる */
 }
 
 .logo img {
@@ -243,6 +244,15 @@ h3 {
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* シャドウ */
     border: 1px solid rgba(255, 255, 255, 0.1); /* わずかな境界線 */
+}
+
+/* サービスアイコン */
+.service-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 12px;
 }
 
 .service-item h3 {
