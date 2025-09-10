@@ -3,68 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>株式会社あなたの会社 - 公式サイト</title>
+    <title>Inspire Up - DX推進とAI導入で、企業の未来を加速する</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <meta name="description" content="DX推進とAI導入で業務効率化・自動化を支援。迅速な実装と高いコストパフォーマンスで企業の未来を加速します。">
+    <meta property="og:title" content="Inspire Up - DXとAI導入で企業成長を加速">
+    <meta property="og:description" content="DX推進・AI導入・業務自動化の実績で持続的成長を支援します。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com/">
+    <meta property="og:image" content="https://example.com/og.jpg">
 </head>
 <body>
 
+    <a class="skip-link" href="#main">メインコンテンツへ移動</a>
+
     <header>
         <div class="container">
-            <h1>あなたの会社</h1>
-            <nav>
-                <ul>
-                    <li><a href="#about">会社概要</a></li>
-                    <li><a href="#services">サービス</a></li>
-                    <li><a href="#contact">お問い合わせ</a></li>
+            <div class="left-tools">
+                <h1 class="logo"><img src="https://res.cloudinary.com/dagugihav/image/upload/v1757499912/InspireUp_logo_gsbdb3.png" alt="">Inspire Up</h1>
+            </div>
+            <div class="right-tools">
+                <button id="quick-tabs" class="tab-button" aria-label="メニュー" aria-haspopup="true" aria-expanded="false" aria-controls="quick-tabs-menu">☰</button>
+                <ul id="quick-tabs-menu" class="quick-tabs-menu" role="menu" hidden>
+                    <li role="none"><a role="menuitem" href="#hero">ホーム</a></li>
+                    <li role="none"><a role="menuitem" href="#about">会社概要</a></li>
+                    <li role="none"><a role="menuitem" href="#services">サービス</a></li>
+                    <li role="none"><a role="menuitem" href="#projects">実績</a></li>
+                    <li role="none"><a role="menuitem" href="#contact">お問い合わせ</a></li>
                 </ul>
-            </nav>
+            </div>
         </div>
     </header>
 
-    <main>
-        <section id="hero">
+    <main id="main">
+        <section id="hero" class="fade-in-section">
             <div class="container">
-                <h2>未来を創造する、あなたの会社です</h2>
-                <p>私たちはお客様の課題を解決し、新しい価値を提供します。</p>
+                <p class="hero-text">DX推進とAI導入で、企業の未来を加速する</p>
+                <p>私たちは、企業のDX推進、AI導入、業務自動化・効率化を支援し、ビジネスの持続的な成長をサポートします。</p>
             </div>
         </section>
 
-        <section id="about">
+        <section id="about" class="fade-in-section">
             <div class="container">
                 <h2>会社概要</h2>
-                <p>私たちは〇〇年に設立されました。私たちのミッションは、〜〜です。</p>
-                <img src="https://via.placeholder.com/600x400.png?text=Company+Image" alt="会社イメージ画像">
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>現在、法人化の手続き中であり、メンバー3名で活動中です。メンバーの2名は早稲田大学理工学部、1名は東京大学に在学しています。</p>
+                        <h3>私たちの強み</h3>
+                        <ul>
+                            <li><strong>最新技術への高い適応力:</strong> 常に最新のAI・DX技術を学び、実際のビジネス課題に応用しています。</li>
+                            <li><strong>柔軟かつスピーディーな開発:</strong> 少数精鋭チームならではのフットワークで、要望に迅速かつ的確に対応可能です。</li>
+                            <li><strong>独自の発想と専門性:</strong> 学術研究と現場実装の両輪で活動し、従来の枠にとらわれない解決策を提供します。</li>
+                            <li><strong>高い知的能力と論理的思考力:</strong> 42 TokyoやMensaでの経験を背景に、複雑な課題を論理的に整理し、最適なソリューションを設計できます。</li>
+                        </ul>
+                    </div>
+                    <img src="https://image.pollinations.ai/prompt/Futuristic%20startup%20team%20collaborating%20on%20a%20project%20with%20holographic%20displays,%20sleek%20design,%20bright%20lighting" alt="メンバーの活動風景" class="about-image" loading="lazy">
+                </div>
             </div>
         </section>
 
-        <section id="services">
+        <section id="services" class="fade-in-section">
             <div class="container">
-                <h2>サービス</h2>
-                <div class="service-item">
-                    <h3>サービスA</h3>
-                    <p>サービスAの説明文が入ります。</p>
-                </div>
-                <div class="service-item">
-                    <h3>サービスB</h3>
-                    <p>サービスBの説明文が入ります。</p>
+                <h2>提供できる価値(ソリューション)</h2>
+                <div class="service-grid">
+                    <div class="service-item">
+                        <h3>DX推進の支援</h3>
+                        <p>業務フローのデジタル化を進め、効率的かつ透明性の高い仕組みを構築します。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>AI導入による競争力強化</h3>
+                        <p>最新のAI技術を活用し、顧客対応、自動化、データ活用などを高次元で実現します。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>業務自動化・効率化</h3>
+                        <p>定型業務の自動化により、工数削減と人的リソースの最適化を実現します。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>スピード感ある開発・実装</h3>
+                        <p>少数精鋭チームだからこそ可能な柔軟性とスピードで、ニーズに迅速対応します。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>業界トップクラスのコストパフォーマンス</h3>
+                        <p>若手チームの強みを活かし、高品質なソリューションを業界でもリーズナブルな価格で提供します。</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact">
+        <section id="projects" class="fade-in-section">
+            <div class="container">
+                <h2>実績・導入事例</h2>
+                <div class="project-item">
+                    <h3>フォーム営業自動化ツール「Salesbot」</h3>
+                    <p>ボタンをクリックして放置するだけで稼働し、1端末あたり1日10,000件以上のフォーム営業を自動送信します。</p>
+                </div>
+                <div class="project-item">
+                    <h3>ECサイト内AIチャットボット開発</h3>
+                    <p>ECサイトに届く問い合わせメールをAIで自動対応し、人的コストを大幅に削減します。</p>
+                </div>
+                <div class="project-item">
+                    <h3>iOS音声チャットアプリ開発</h3>
+                    <p>高齢者の孤独感を軽減し、日常の安心感を提供する音声AIチャットアプリを正式リリースしました。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="fade-in-section">
             <div class="container">
                 <h2>お問い合わせ</h2>
-                <p>ご質問やご相談がありましたら、お気軽にお問い合わせください。</p>
-                <p>メールアドレス: info@yourcompany.com</p>
+                <p>ご質問やご相談がありましたら、お気軽にご連絡ください。お客様のあらゆる課題に対し、最適な解決策をご提案します。</p>
+                <ul class="contact-info">
+                    <li><strong>会社名:</strong> Inspire Up</li>
+                    <li><strong>電話番号:</strong> 080-2342-4513</li>
+                    <li><strong>メールアドレス:</strong> inspireup.w.official@gmail.com</li>
+                    <li><strong>公式LINE:</strong> <a href="https://lin.ee/zrudU0a" target="_blank" rel="noopener">https://lin.ee/zrudU0a</a></li>
+                </ul>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Your Company. All Rights Reserved.</p>
+            <p>&copy; 2025 Inspire Up. All Rights Reserved.</p>
         </div>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
