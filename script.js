@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.2 }); // 20%表示されたら発火
 
     document.querySelectorAll('.fade-in-section').forEach(section => {
         fadeInObserver.observe(section);
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentScrollY = window.scrollY;
             const headerHeight = header.offsetHeight;
             const isScrollingDown = currentScrollY > lastScrollY;
-            const isScrolledPastHeader = currentScrollY > headerHeight;
+            const isScrolledPastHeader = currentScrollY > headerHeight; // ヘッダーを完全にスクロールし終えたか
 
             if (isScrollingDown && isScrolledPastHeader) {
                 header.classList.add('header-hidden');
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.requestAnimationFrame(updateHeaderVisibility);
                 ticking = true;
             }
-        }, { passive: true });
+        }, { passive: true }); // パッシブリスナーでスクロールパフォーマンスを向上
     }
 
     // スクロールに応じたナビゲーションの現在地ハイライト
@@ -55,15 +55,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
-        const headerHeight = header ? header.offsetHeight : 70;
+        const headerHeight = header ? header.offsetHeight : 70; // ヘッダーの高さを取得 (fallbackとして70px)
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                // セクションがビューポートの上部に来たときにアクティブにする
+                // rootMarginを調整して、ヘッダーの下にセクションが来たときに判定する
                 if (entry.isIntersecting) {
                     setActiveLink(entry.target.id);
                 }
             });
         }, {
-            rootMargin: `-${headerHeight}px 0px -60% 0px`
+            rootMargin: `-${headerHeight}px 0px -60% 0px` // ヘッダーの高さを考慮し、上部からの判定位置を調整
         });
 
         sections.forEach(section => sectionObserver.observe(section));
@@ -84,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         quickTabsBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
+            e.stopPropagation(); // イベントのバブリングを停止
             const isHidden = quickTabsMenu.hasAttribute('hidden');
             if (isHidden) openMenu(); else closeMenu();
         });
@@ -103,24 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeMenu();
-            }
-        });
-    }
-
-    // CTAボタンのスクロール挙動
-    const ctaButton = document.querySelector('.cta-button');
-    if (ctaButton) {
-        ctaButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = ctaButton.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            if (targetSection) {
-                const headerHeight = header ? header.offsetHeight : 70;
-                const offsetTop = targetSection.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
             }
         });
     }

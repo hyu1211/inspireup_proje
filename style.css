@@ -1,39 +1,62 @@
-/* 基本設定 */
+/* ========================================= */
+/* 1. 基本設定 & CSSカスタムプロパティ (変数) */
+/* ========================================= */
+:root {
+    /* カラーパレット */
+    --color-primary-bg: #001029; /* ページ全体の背景色 (濃紺) */
+    --color-secondary-bg: #1C2B3A; /* セクション背景色 (少し明るい紺) */
+    --color-tertiary-bg: #273A4F; /* カード・メニュー背景色 (さらに明るい紺) */
+    --color-text-primary: #E0E7EB; /* 主要なテキスト色 (白に近いグレー) */
+    --color-text-secondary: #A7BCCB; /* 補助的なテキスト色 (中間グレー) */
+    --color-accent: #376EC0; /* アクセントカラー (青) */
+    --color-accent-dark: #2A5490; /* アクセントカラーのホバー時 (濃い青) */
+    --color-link-hover: #5A8FD3; /* リンクホバー時の色 (明るい青) */
+    --color-border: rgba(255,255,255,0.08); /* 境界線色 */
+    --color-shadow-light: rgba(0,0,0,0.2); /* 軽い影 */
+    --color-shadow-medium: rgba(0,0,0,0.3); /* 中間の影 */
+    --color-shadow-heavy: rgba(0,0,0,0.4); /* 濃い影 */
+
+    /* レイアウト */
+    --header-height: 100px; /* ヘッダーの基準高さ */
+    --content-max-width: 1100px; /* コンテンツの最大幅 */
+    --section-padding-y: 100px; /* セクションの上下パディング */
+
+    /* タイポグラフィ */
+    --font-family-base: "Noto Sans JP", sans-serif;
+    --font-family-heading: "Noto Serif JP", serif;
+    --font-family-hero: "Montserrat", sans-serif;
+
+    /* 行間・フォントサイズ */
+    --line-height-base: 1.75;
+    --font-size-base: 1.05rem;
+    --font-size-small: 0.95rem;
+    --font-size-large: 1.15rem;
+}
+
+/* body要素のリセットと基本設定 */
 body {
-    font-family: "Noto Sans JP", sans-serif;
-    line-height: 1.65;
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-base);
     margin: 0;
-    color: var(--text-primary);
-    background-color: var(--page-bg);
+    color: var(--color-text-primary);
+    background-color: var(--color-primary-bg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* ダークテーマ用カラーパレット */
-:root {
-    --header-height: 80px;
-    /* カラーパレット */
-    --page-bg: #001029; /* 紺色基調の背景 */
-    --surface-1: #1C2B3A;
-    --surface-2: #273A4F;
-    --text-primary: #E0E7EB;
-    --text-secondary: #A7BCCB;
-    --accent: #376EC0;
-    --accent-dark: #2A5490;
-    --link-hover: #5A8FD3;
-    --border-color-dark: rgba(255,255,255,0.08);
-}
-
+/* 全体のコンテナ */
 .container {
-    max-width: 1100px;
+    max-width: var(--content-max-width);
     margin: 0 auto;
     padding: 0 25px;
 }
 
-/* ヘッダー */
+/* ========================================= */
+/* 2. ヘッダー */
+/* ========================================= */
 header {
-    background: var(--page-bg); /* 紺色の背景 */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    background: var(--color-primary-bg);
+    box-shadow: 0 4px 15px var(--color-shadow-heavy);
     padding: 10px 0;
     position: sticky;
     top: 0;
@@ -58,14 +81,13 @@ header .container {
     opacity: 0;
 }
 
-/* ロゴのスタイル */
 .logo {
     margin: 0;
     line-height: 1;
 }
 
 .logo img {
-    height: 75px;
+    height: 80px; /* 指定された高さ */
     width: auto;
     display: block;
 }
@@ -75,14 +97,14 @@ header .container {
     position: absolute;
     top: calc(100% + 10px);
     right: 0;
-    background: var(--surface-2);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: var(--color-tertiary-bg);
+    border: 1px solid var(--color-border);
     border-radius: 8px;
     padding: 10px 0;
     list-style: none;
     margin: 0;
-    min-width: 200px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    min-width: 220px;
+    box-shadow: 0 10px 25px var(--color-shadow-heavy);
     z-index: 1100;
     overflow: hidden;
 }
@@ -91,23 +113,23 @@ header .container {
     display: flex;
     align-items: center;
     padding: 12px 18px;
-    color: var(--text-primary);
+    color: var(--color-text-primary);
     text-decoration: none;
     transition: background-color 0.25s ease, color 0.25s ease;
     font-weight: 500;
 }
 .quick-tabs-menu li a .fas {
     margin-right: 12px;
-    color: var(--accent);
+    color: var(--color-accent);
     font-size: 1.1em;
 }
 .quick-tabs-menu li a:hover,
 .quick-tabs-menu li a:focus {
     background: rgba(255,255,255,0.06);
-    color: var(--link-hover);
+    color: var(--color-link-hover);
 }
 .quick-tabs-menu li a.active {
-    background: var(--accent);
+    background: var(--color-accent);
     color: #fff;
     font-weight: 700;
 }
@@ -117,7 +139,7 @@ header .container {
 
 /* タブボタン (メニューアイコン) */
 .tab-button {
-    background: var(--accent);
+    background: var(--color-accent);
     color: #fff;
     border: none;
     padding: 10px 14px;
@@ -130,7 +152,7 @@ header .container {
     justify-content: center;
 }
 .tab-button:hover {
-    background-color: var(--accent-dark);
+    background-color: var(--color-accent-dark);
     transform: translateY(-1px);
 }
 .tab-button:active {
@@ -138,77 +160,82 @@ header .container {
 }
 
 
+/* ========================================= */
+/* 3. グローバルなタイポグラフィと要素 */
+/* ========================================= */
 /* フォーカスリングの可視化 */
 a:focus-visible,
 button:focus-visible {
-    outline: 3px solid var(--link-hover);
+    outline: 3px solid var(--color-link-hover);
     outline-offset: 3px;
     border-radius: 4px;
 }
 
-/* メインコンテンツ */
 section {
-    padding: 100px 0;
+    padding: var(--section-padding-y) 0;
     position: relative;
-    scroll-margin-top: var(--header-height);
+    scroll-margin-top: var(--header-height); /* スクロール時の固定ヘッダー対策 */
 }
-section:nth-of-type(even) {
-    background-color: var(--surface-1);
+section:nth-of-type(even) { /* 偶数番目のセクションの背景色 */
+    background-color: var(--color-secondary-bg);
 }
-section:nth-of-type(odd) {
-    background-color: var(--page-bg);
+section:nth-of-type(odd) { /* 奇数番目のセクションの背景色 */
+    background-color: var(--color-primary-bg);
 }
 
 
 h2 {
-    color: var(--accent);
+    color: var(--color-accent);
     font-size: clamp(2.2rem, 4vw, 3.2rem);
     font-weight: 700;
-    font-family: 'Noto Serif JP', serif;
+    font-family: var(--font-family-heading);
     text-align: center;
     margin-bottom: 70px;
     letter-spacing: 0.03em;
     text-shadow: 0 0 10px rgba(55, 110, 192, 0.2);
 }
-h2::after {
+h2::after { /* 下線 */
     content: '';
     display: block;
     width: 60px;
     height: 4px;
-    background-color: var(--accent);
+    background-color: var(--color-accent);
     margin: 20px auto 0;
     border-radius: 2px;
 }
 
-
 h3 {
-    color: var(--text-primary);
-    font-family: 'Noto Serif JP', serif;
+    color: var(--color-text-primary);
+    font-family: var(--font-family-heading);
     font-weight: 600;
-    font-size: 1.7rem;
+    font-size: clamp(1.5rem, 3vw, 1.9rem);
     margin-top: 0;
     margin-bottom: 20px;
 }
 
 p {
-    color: var(--text-secondary);
-    font-size: 1.05rem;
-    line-height: 1.8;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
 }
+
+/* ========================================= */
+/* 4. 各セクションのスタイル */
+/* ========================================= */
 
 /* ヒーローセクション */
 #hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('https://image.pollinations.ai/prompt/Abstract%20futuristic%20digital%20network%20lines%20glowing%20blue%20and%20purple%20on%20a%20dark%20background,%20clean,%20modern,%20high%20tech') no-repeat center center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('https://image.pollinations.ai/prompt/Abstract%20digital%20network%20lines%20and%20dots,%20glowing%20blue%20and%20purple%20on%20a%20dark%20background,%20clean,%20modern,%20high%20tech,%20blurred%20background%20for%20text%20readability') no-repeat center center/cover;
     text-align: center;
-    margin-top: calc(-1 * var(--header-height));
-    padding: calc(180px + var(--header-height)) 0 150px 0;
+    margin-top: calc(-1 * var(--header-height)); /* ヘッダー分上に詰める */
+    padding: calc(180px + var(--header-height)) 0 150px 0; /* ヘッダー分を考慮したパディング */
     color: #fff;
     min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-#hero h2::after { display: none; }
+#hero h2::after { display: none; } /* ヒーロー内のH2には下線不要 */
 
 
 .hero-container {
@@ -218,7 +245,7 @@ p {
 
 .hero-heading {
     text-align: center;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-family-hero);
     font-weight: 800;
     line-height: 1.2;
     font-size: clamp(2.8rem, 5.5vw, 4.2rem);
@@ -226,173 +253,309 @@ p {
     margin: 0 0 35px 0;
     position: relative;
     color: #fff;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 4px 15px var(--color-shadow-heavy);
 }
-.hero-heading span { display: block; }
+.hero-heading span { display: block; } /* 複数行に分けるための表示 */
 
 .hero-sub {
     margin-top: 25px;
     text-align: center;
     max-width: 65ch; /* 文字数で幅を制御 */
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: var(--text-secondary);
+    font-size: var(--font-size-large);
+    line-height: var(--line-height-base);
+    color: var(--color-text-secondary);
     margin-left: auto;
     margin-right: auto;
 }
 
-/* 会社概要セクション */
-.about-content {
+/* 会社情報セクション (#company-info) */
+#company-info {
+    background-color: var(--color-secondary-bg); /* 偶数セクションの背景色 */
+}
+.company-info-content {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start; /* 上揃え */
     gap: 60px;
 }
 
-.about-image-wrapper {
+.company-text {
+    flex: 1;
+}
+
+.company-section {
+    margin-bottom: 40px;
+}
+.company-section:last-of-type {
+    margin-bottom: 0;
+}
+.company-section h3 {
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    margin-bottom: 15px;
+    color: var(--color-accent);
+}
+.company-section p {
+    margin-bottom: 15px;
+}
+.company-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+.company-section ul li {
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+}
+.company-section ul li::before {
+    content: "\f00c"; /* check-circle icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: var(--color-accent);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 0.9em;
+}
+.company-section ul li strong {
+    color: var(--color-text-primary);
+}
+
+
+.company-image-wrapper {
     flex-shrink: 0;
     width: 45%;
     max-width: 500px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 30px var(--color-shadow-heavy);
     border-radius: 12px;
     overflow: hidden;
+    position: relative;
+    text-align: center;
 }
 
-.about-image {
+.company-image {
     width: 100%;
     height: auto;
     display: block;
     transition: transform 0.3s ease;
 }
-.about-image:hover {
+.company-image:hover {
     transform: scale(1.03);
 }
 
-.about-text {
-    flex: 1;
+.image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 10px 0;
+    margin: 0;
+    font-size: var(--font-size-small);
+    font-weight: 500;
+}
+
+
+/* 私たちの強みセクション (#strengths) - スタイリッシュな箇条書き */
+#strengths {
+    background-color: var(--color-primary-bg); /* 奇数セクションの背景色 */
 }
 
 .strength-list {
-    list-style-type: none;
-    padding-left: 0;
-    margin-top: 30px;
+    list-style: none;
+    padding: 0;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* 2カラム想定 */
+    gap: 40px 60px; /* 上下左右のギャップ */
 }
 
-.strength-list li {
-    margin-bottom: 18px;
-    color: var(--text-secondary);
+.strength-list-item {
     display: flex;
     align-items: flex-start;
-    line-height: 1.7;
+    gap: 25px;
+    padding: 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
-.strength-list li strong {
-    color: var(--text-primary);
-    margin-right: 8px;
-}
-.strength-list li .fas {
-    color: var(--accent);
-    margin-right: 15px;
-    font-size: 1.2em;
-    flex-shrink: 0;
-    margin-top: 4px;
+.strength-list-item:hover {
+    background-color: var(--color-tertiary-bg);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--color-shadow-medium);
 }
 
-/* サービスセクション */
-.service-grid {
+.strength-icon-bullet {
+    font-size: 2.8rem;
+    color: var(--color-accent);
+    flex-shrink: 0; /* アイコンが縮まないように */
+    line-height: 1;
+    text-shadow: 0 0 8px rgba(55, 110, 192, 0.3);
+}
+
+.strength-list-content h3 {
+    font-size: clamp(1.4rem, 2.5vw, 1.7rem);
+    margin-bottom: 8px;
+    color: var(--color-text-primary);
+}
+
+.strength-list-content p {
+    font-size: var(--font-size-small);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+
+/* 提供できる価値（ソリューション）セクション (#services) - アイコン強調グリッド */
+#services {
+    background-color: var(--color-secondary-bg);
+}
+
+.service-grid-new {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 35px;
+    margin-top: 40px;
 }
 
-.service-item {
-    background: var(--surface-2);
+.service-item-new {
+    background: var(--color-tertiary-bg);
     padding: 35px;
-    border-radius: 10px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-color-dark);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px var(--color-shadow-medium);
+    border: 1px solid var(--color-border);
     text-align: center;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.service-item:hover {
+.service-item-new:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 12px 30px var(--color-shadow-heavy);
 }
 
-.service-item .service-icon {
-    font-size: 3.5rem;
-    color: var(--accent);
-    margin-bottom: 20px;
-    display: block;
-    text-align: center;
-    width: auto;
-    height: auto;
-    line-height: 1;
-}
-
-.service-item h3 {
-    color: var(--text-primary);
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-}
-
-.service-item p {
-    color: var(--text-secondary);
-}
-
-/* 実績セクション */
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-/* 実績リンクのスタイル */
-.project-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    border-radius: 8px;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.project-item {
-    background: var(--surface-2);
-    padding: 30px;
-    border-left: 5px solid var(--accent);
-    border-radius: 8px; /* 角丸は内部要素にも適用 */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-color-dark);
-    height: 100%; /* aタグの高さいっぱいに広がるように */
-    box-sizing: border-box; /* paddingを含めた高さ計算 */
-}
-
-/* ホバーエフェクトをリンク側に移動 */
-.project-link:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-}
-
-.project-item h3 {
-    color: var(--text-primary);
-    font-size: 1.6rem;
+.service-icon-new-wrapper {
+    width: 80px; /* アイコンを囲む円のサイズ */
+    height: 80px;
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark)); /* グラデーション */
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
+    margin-bottom: 25px;
+    color: #fff;
+    font-size: 3rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.project-item h3 .fas {
-    color: var(--accent);
-    font-size: 1.3em;
+.service-item-new:hover .service-icon-new-wrapper {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
 }
 
-.project-item p {
-    color: var(--text-secondary);
+.service-item-new h3 {
+    font-size: clamp(1.5rem, 2.8vw, 1.8rem);
+    margin-bottom: 15px;
+    color: var(--color-text-primary);
 }
+
+.service-item-new p {
+    font-size: var(--font-size-small);
+    line-height: 1.6;
+    flex-grow: 1; /* 内容の長さに合わせて調整 */
+    margin-bottom: 0;
+}
+
+
+/* 実績・導入事例セクション (#projects) - カードとリンクを強調 */
+#projects {
+    background-color: var(--color-primary-bg);
+}
+
+.project-cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.project-card {
+    background: var(--color-tertiary-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px var(--color-shadow-medium);
+    border-left: 5px solid var(--color-accent); /* 左側のアクセントライン */
+    display: flex;
+    flex-direction: column; /* 縦並び */
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px var(--color-shadow-heavy);
+    border-color: var(--color-link-hover);
+}
+
+.project-card-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.project-card-content {
+    flex-grow: 1; /* 残りのスペースを埋める */
+}
+
+.project-card-content h3 {
+    font-size: clamp(1.4rem, 2.6vw, 1.7rem);
+    margin-bottom: 12px;
+    color: var(--color-text-primary);
+}
+
+.project-card-content p {
+    font-size: var(--font-size-small);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.project-card-link-text {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-accent);
+    font-weight: 600;
+    margin-top: auto; /* 下部に配置 */
+    transition: color 0.3s ease;
+}
+.project-card:hover .project-card-link-text {
+    color: var(--color-link-hover);
+}
+.project-card-link-text .fas {
+    margin-left: 8px;
+    font-size: 0.9em;
+    transition: transform 0.3s ease;
+}
+.project-card:hover .project-card-link-text .fas {
+    transform: translateX(5px);
+}
+
 
 /* お問い合わせセクション */
 .contact-description {
-    max-width: 65ch; /* 文字数で幅を制御 */
+    max-width: 65ch;
     margin: 0 auto 60px auto;
-    font-size: 1.1rem;
+    font-size: var(--font-size-large);
 }
 
 .contact-details {
@@ -413,14 +576,14 @@ p {
 
 .contact-info li {
     margin-bottom: 20px;
-    color: var(--text-secondary);
-    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-large);
     display: flex;
     align-items: center;
 }
 .contact-info li .fas,
 .contact-info li .fab {
-    color: var(--accent);
+    color: var(--color-accent);
     margin-right: 15px;
     font-size: 1.2em;
     width: 25px;
@@ -430,29 +593,29 @@ p {
 .contact-info li strong {
     display: inline-block;
     min-width: 110px;
-    color: var(--text-primary);
+    color: var(--color-text-primary);
     margin-right: 8px;
 }
 
 
 .contact-info a {
-    color: var(--accent);
+    color: var(--color-accent);
     text-decoration: none;
     position: relative;
     transition: color 0.3s ease;
 }
-.contact-info a::after {
+.contact-info a::after { /* ホバー時の下線 */
     content: '';
     position: absolute;
     left: 0;
     bottom: -3px;
     width: 0;
     height: 2px;
-    background-color: var(--accent);
+    background-color: var(--color-accent);
     transition: width 0.3s ease;
 }
 .contact-info a:hover {
-    color: var(--link-hover);
+    color: var(--color-link-hover);
 }
 .contact-info a:hover::after {
     width: 100%;
@@ -462,21 +625,27 @@ p {
     max-width: 400px;
     height: auto;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 30px var(--color-shadow-heavy);
 }
 
 
-/* フッター */
+/* ========================================= */
+/* 5. フッター */
+/* ========================================= */
 footer {
-    background-color: var(--surface-2);
-    color: var(--text-secondary);
+    background-color: var(--color-tertiary-bg);
+    color: var(--color-text-secondary);
     text-align: center;
     padding: 25px 0;
-    border-top: 1px solid var(--border-color-dark);
-    font-size: 0.95rem;
+    border-top: 1px solid var(--color-border);
+    font-size: var(--font-size-small);
 }
 
-/* アニメーション */
+/* ========================================= */
+/* 6. アニメーション & アクセシビリティ */
+/* ========================================= */
+
+/* フェードインアニメーション */
 .fade-in-section {
     opacity: 0;
     transform: translateY(30px);
@@ -508,9 +677,9 @@ footer {
     color: #fff;
     border-radius: 6px;
     z-index: 9999;
-    font-size: 1.05rem;
+    font-size: var(--font-size-base);
     text-decoration: none;
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    box-shadow: 0 0 15px var(--color-shadow-heavy);
 }
 
 /* スムーススクロール（低モーション時は無効） */
@@ -524,7 +693,9 @@ html { scroll-behavior: smooth; }
     }
 }
 
-/* モバイル対応 */
+/* ========================================= */
+/* 7. レスポンシブデザイン */
+/* ========================================= */
 @media (max-width: 992px) {
     .container {
         padding: 0 15px;
@@ -534,7 +705,7 @@ html { scroll-behavior: smooth; }
         margin-bottom: 50px;
     }
     h3 {
-        font-size: 1.5rem;
+        font-size: clamp(1.4rem, 3.5vw, 1.7rem);
     }
     .hero-heading {
         font-size: clamp(2.4rem, 6.5vw, 3.8rem);
@@ -542,30 +713,95 @@ html { scroll-behavior: smooth; }
     .hero-sub {
         font-size: 1rem;
     }
-    .about-content,
+
+    /* 会社情報セクション */
+    .company-info-content,
     .contact-details {
         flex-direction: column;
         gap: 40px;
     }
-    .about-image-wrapper,
+    .company-image-wrapper {
+        order: -1; /* 画像を上に移動 */
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto 30px auto;
+    }
+    .company-text {
+        width: 100%;
+        text-align: left;
+    }
+    .company-section {
+        margin-bottom: 30px;
+    }
+    .company-section h3 {
+        font-size: clamp(1.4rem, 3.5vw, 1.7rem);
+    }
     .contact-image {
         width: 100%;
         max-width: 600px;
         margin: 0 auto;
     }
-    .about-text,
-    .contact-info {
-        width: 100%;
-        text-align: left;
+
+
+    /* 強みセクション */
+    .strength-list {
+        grid-template-columns: 1fr; /* 1カラム */
+        gap: 30px;
     }
-    .service-grid,
-    .project-grid {
-        grid-template-columns: 1fr;
+    .strength-list-item {
+        padding: 18px;
+        gap: 20px;
     }
-    .service-item,
-    .project-item {
+    .strength-icon-bullet {
+        font-size: 2.2rem;
+    }
+    .strength-list-content h3 {
+        font-size: clamp(1.2rem, 2.8vw, 1.5rem);
+    }
+    .strength-list-content p {
+        font-size: 0.9rem;
+    }
+
+
+    /* 提供できる価値（ソリューション）セクション */
+    .service-grid-new {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 小さな画面でも2列になるように調整 */
+        gap: 25px;
+    }
+    .service-item-new {
         padding: 25px;
     }
+    .service-icon-new-wrapper {
+        width: 70px;
+        height: 70px;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+    .service-item-new h3 {
+        font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+    }
+
+
+    /* 実績セクション */
+    .project-cards-wrapper {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    .project-card {
+        padding: 25px;
+    }
+    .project-card-icon-wrapper {
+        width: 50px;
+        height: 50px;
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+    .project-card-content h3 {
+        font-size: clamp(1.3rem, 2.8vw, 1.5rem);
+    }
+
+
+    /* パディング調整 */
     #hero {
         padding: calc(150px + var(--header-height)) 0 100px 0;
     }
@@ -576,7 +812,13 @@ html { scroll-behavior: smooth; }
 
 @media (max-width: 480px) {
     .logo img {
-        height: 40px;
+        height: 60px; /* 小さい画面ではロゴを少し小さく */
+    }
+    header {
+        min-height: calc(var(--header-height) - 20px); /* ロゴに合わせてヘッダーの高さも調整 */
+    }
+    section {
+        scroll-margin-top: calc(var(--header-height) - 20px);
     }
     .tab-button {
         padding: 8px 12px;
@@ -589,15 +831,23 @@ html { scroll-behavior: smooth; }
         font-size: clamp(2rem, 7vw, 3rem);
     }
     .hero-sub {
-        font-size: 0.95rem;
-    }
-    .strength-list li {
-        font-size: 0.95rem;
+        font-size: var(--font-size-base);
     }
     .contact-info li {
-        font-size: 1rem;
+        font-size: var(--font-size-base);
     }
     .contact-info li strong {
         min-width: 90px;
+    }
+    .service-grid-new {
+        grid-template-columns: 1fr; /* スマホでは1列に */
+    }
+    .strength-list-item {
+        flex-direction: column; /* 強みも縦並びに */
+        text-align: center;
+        align-items: center;
+    }
+    .strength-icon-bullet {
+        margin-bottom: 10px;
     }
 }
