@@ -1,146 +1,109 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // フェードイン
+
+    // 各セクションのフェードインアニメーション
+    const fadeInObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
     document.querySelectorAll('.fade-in-section').forEach(section => {
-        new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 }).observe(section);
+        fadeInObserver.observe(section);
     });
 
-    // メニュー開閉（モバイル時）
-    const menuBtn = document.getElementById('menu-toggle');
-    const nav = document.getElementById('main-nav');
-    if (menuBtn && nav) {
-        const closeNav = () => {
-            nav.classList.remove('open');
-            menuBtn.setAttribute('aria-expanded', 'false');
-        };
-        const openNav = () => {
-            nav.classList.add('open');
-            menuBtn.setAttribute('aria-expanded', 'true');
-        };
-        const toggleNav = () => {
-            const willOpen = !nav.classList.contains('open');
-            if (willOpen) openNav(); else closeNav();
-        };
-
-        menuBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleNav();
-        });
-
-        // メニュー領域内のクリックはバブリング停止（外側クリック閉じと干渉しないように）
-        nav.addEventListener('click', (e) => e.stopPropagation());
-
-        // メニューリンククリックで自動的に閉じる（スマホ時のみ）
-        nav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.matchMedia('(max-width: 768px)').matches) {
-                    closeNav();
-                }
-            });
-        });
-
-        // 外側クリック・Escapeで閉じる（モバイル時のみ）
-        document.addEventListener('click', () => {
-            if (window.matchMedia('(max-width: 768px)').matches) {
-                closeNav();
-            }
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && window.matchMedia('(max-width: 768px)').matches) {
-                closeNav();
-            }
-        });
-
-        // 画面サイズが変わったら状態をリセット（デスクトップ復帰時に必ず開いた状態を解除）
-        window.addEventListener('resize', () => {
-            if (!window.matchMedia('(max-width: 768px)').matches) {
-                nav.classList.remove('open');
-                menuBtn.setAttribute('aria-expanded', 'false');
-            }
-        });
-    }
-
-    // スクロール方向でヘッダーをフェードイン/アウト
-    const headerEl = document.querySelector('header');
-    if (headerEl) {
-        let lastY = window.scrollY;
+    // スクロール方向に応じてヘッダーを表示/非表示
+    const header = document.querySelector('header');
+    if (header) {
+        let lastScrollY = window.scrollY;
         let ticking = false;
-        const handleScroll = () => {
-            const currentY = window.scrollY;
-            const goingDown = currentY > lastY;
-            const beyond = currentY > 10; // 少しスクロールしたら適用
-            if (goingDown && beyond) {
-                headerEl.classList.add('header-hidden');
+
+        const updateHeaderVisibility = () => {
+            const currentScrollY = window.scrollY;
+            const isScrollingDown = currentScrollY > lastScrollY;
+            const isScrolledPastHeader = currentScrollY > header.clientHeight;
+
+            if (isScrollingDown && isScrolledPastHeader) {
+                header.classList.add('header-hidden');
             } else {
-                headerEl.classList.remove('header-hidden');
+                header.classList.remove('header-hidden');
             }
-            lastY = currentY;
+            lastScrollY = currentScrollY;
             ticking = false;
         };
+
         window.addEventListener('scroll', () => {
             if (!ticking) {
-                window.requestAnimationFrame(handleScroll);
+                window.requestAnimationFrame(updateHeaderVisibility);
                 ticking = true;
             }
         }, { passive: true });
     }
 
-    // 現在地ハイライト
+    // 【修正】スクロールに応じたナビゲーションの現在地ハイライト
     const sections = document.querySelectorAll('main section[id]');
-    const navLinks = document.querySelectorAll('#main-nav a[href^="#"]');
+    const navLinks = document.querySelectorAll('#quick-tabs-menu a[href^="#"]'); // 修正: 正しいメニューのリンクを参照
+    
     if (sections.length && navLinks.length) {
-        const linkMap = new Map(
-            Array.from(navLinks).map(a => [a.getAttribute('href').slice(1), a])
-        );
-        const setActive = (id) => {
-            navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${id}`));
+        const setActiveLink = (id) => {
+            navLinks.forEach(link => {
+                const isActive = link.getAttribute('href') === `#${id}`;
+                link.classList.toggle('active', isActive);
+            });
         };
-        const observer = new IntersectionObserver((entries) => {
+
+        const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    setActive(entry.target.id);
+                    setActiveLink(entry.target.id);
                 }
             });
-        }, { rootMargin: '-40% 0px -50% 0px', threshold: 0.01 });
-        sections.forEach(sec => observer.observe(sec));
+        }, { 
+            rootMargin: `-${header.clientHeight}px 0px -60% 0px` // ヘッダーの高さを考慮
+        });
+
+        sections.forEach(section => sectionObserver.observe(section));
     }
 
-    // （タブ機能は撤去）
 
-    // 左上クイックタブ（ドロップダウン）
+    // 右上のクイックタブメニュー（ドロップダウン）
     const quickTabsBtn = document.getElementById('quick-tabs');
     const quickTabsMenu = document.getElementById('quick-tabs-menu');
     if (quickTabsBtn && quickTabsMenu) {
-        const openQuickTabs = () => {
+        const openMenu = () => {
             quickTabsMenu.removeAttribute('hidden');
             quickTabsBtn.setAttribute('aria-expanded', 'true');
         };
-        const closeQuickTabs = () => {
+        const closeMenu = () => {
             quickTabsMenu.setAttribute('hidden', '');
             quickTabsBtn.setAttribute('aria-expanded', 'false');
-        };
-        const toggleQuickTabs = () => {
-            const isHidden = quickTabsMenu.hasAttribute('hidden');
-            if (isHidden) openQuickTabs(); else closeQuickTabs();
         };
 
         quickTabsBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            toggleQuickTabs();
+            const isHidden = quickTabsMenu.hasAttribute('hidden');
+            if (isHidden) openMenu(); else closeMenu();
         });
-        quickTabsMenu.addEventListener('click', (e) => e.stopPropagation());
-        document.addEventListener('click', () => closeQuickTabs());
+
+        // メニュー内のリンククリックで閉じる
+        quickTabsMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // ドキュメントのどこかをクリック、またはEscapeキーで閉じる
+        document.addEventListener('click', (e) => {
+            if (!quickTabsMenu.contains(e.target) && !quickTabsBtn.contains(e.target)) {
+                closeMenu();
+            }
+        });
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeQuickTabs();
-        });
-        quickTabsMenu.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', () => closeQuickTabs());
+            if (e.key === 'Escape') {
+                closeMenu();
+            }
         });
     }
+
+    // 【削除】HTMLに存在しない要素を参照していた不要なコードを削除しました。
 });
