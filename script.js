@@ -22,8 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const updateHeaderVisibility = () => {
             const currentScrollY = window.scrollY;
+            const headerHeight = header.offsetHeight;
             const isScrollingDown = currentScrollY > lastScrollY;
-            const isScrolledPastHeader = currentScrollY > header.clientHeight;
+            const isScrolledPastHeader = currentScrollY > headerHeight;
 
             if (isScrollingDown && isScrolledPastHeader) {
                 header.classList.add('header-hidden');
@@ -42,10 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
     }
 
-    // 【修正】スクロールに応じたナビゲーションの現在地ハイライト
+    // スクロールに応じたナビゲーションの現在地ハイライト
     const sections = document.querySelectorAll('main section[id]');
-    const navLinks = document.querySelectorAll('#quick-tabs-menu a[href^="#"]'); // 修正: 正しいメニューのリンクを参照
-    
+    const navLinks = document.querySelectorAll('#quick-tabs-menu a[href^="#"]');
+
     if (sections.length && navLinks.length) {
         const setActiveLink = (id) => {
             navLinks.forEach(link => {
@@ -54,14 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
+        const headerHeight = header ? header.offsetHeight : 70;
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     setActiveLink(entry.target.id);
                 }
             });
-        }, { 
-            rootMargin: `-${header.clientHeight}px 0px -60% 0px` // ヘッダーの高さを考慮
+        }, {
+            rootMargin: `-${headerHeight}px 0px -60% 0px`
         });
 
         sections.forEach(section => sectionObserver.observe(section));
@@ -105,5 +107,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 【削除】HTMLに存在しない要素を参照していた不要なコードを削除しました。
+    // CTAボタンのスクロール挙動
+    const ctaButton = document.querySelector('.cta-button');
+    if (ctaButton) {
+        ctaButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = ctaButton.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                const headerHeight = header ? header.offsetHeight : 70;
+                const offsetTop = targetSection.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    }
 });

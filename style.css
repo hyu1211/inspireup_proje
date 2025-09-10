@@ -1,38 +1,39 @@
 /* 基本設定 */
 body {
     font-family: "Noto Sans JP", sans-serif;
-    line-height: 1.65; /* 行間を少し広げる */
+    line-height: 1.65;
     margin: 0;
     color: var(--text-primary);
     background-color: var(--page-bg);
-    -webkit-font-smoothing: antialiased; /* フォントのアンチエイリアス */
-    -moz-osx-font-smoothing: grayscale; /* フォントのアンチエイリアス */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* レイアウト用の共通サイズとカラーパレット */
+/* ダークテーマ用カラーパレット */
 :root {
-    --header-height: 70px; /* ヘッダーの高さを少し下げる */
+    --header-height: 80px;
     /* カラーパレット */
-    --page-bg: #0D1B2A; /* ダークネイビー */
-    --surface-1: #1C2B3A; /* 少し明るいダークネイビー */
-    --surface-2: #273A4F; /* さらに明るいダークネイビー */
-    --text-primary: #E0E7EB; /* 明るいグレー */
-    --text-secondary: #A7BCCB; /* 中間的なグレー */
-    --accent: #41A0FF; /* 鮮やかなスカイブルー */
-    --accent-dark: #2B7CD8; /* アクセントの濃い色 */
-    --link-hover: #72B9FF;
+    --page-bg: #001029; /* 紺色基調の背景 */
+    --surface-1: #1C2B3A;
+    --surface-2: #273A4F;
+    --text-primary: #E0E7EB;
+    --text-secondary: #A7BCCB;
+    --accent: #376EC0;
+    --accent-dark: #2A5490;
+    --link-hover: #5A8FD3;
+    --border-color-dark: rgba(255,255,255,0.08);
 }
 
 .container {
-    max-width: 1100px; /* コンテナ幅を広げる */
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 25px; /* 左右のパディングを増やす */
+    padding: 0 25px;
 }
 
 /* ヘッダー */
 header {
-    background: var(--page-bg); /* 背景色をページ全体と合わせる */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* シャドウを少し強めに */
+    background: var(--page-bg); /* 紺色の背景 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     padding: 10px 0;
     position: sticky;
     top: 0;
@@ -40,7 +41,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: var(--header-height); /* 高さを設定 */
+    min-height: var(--header-height);
     transition: transform 0.35s ease-out, opacity 0.35s ease-out;
     will-change: transform, opacity;
 }
@@ -57,63 +58,47 @@ header .container {
     opacity: 0;
 }
 
-.left-tools {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.right-tools {
-    position: relative;
-}
-
+/* ロゴのスタイル */
 .logo {
     margin: 0;
-    display: inline-flex;
-    align-items: center;
-    font-size: 1.8rem; /* 少し小さく */
-    font-weight: 700; /* 太さも調整 */
-    color: var(--text-primary);
-    font-family: 'Montserrat', sans-serif; /* ロゴのフォントはMontserrat */
-    letter-spacing: -0.02em; /* 字間を詰める */
+    line-height: 1;
 }
 
 .logo img {
-    height: 32px; /* ロゴ画像を少し小さく */
+    height: 80px;
     width: auto;
     display: block;
-    filter: drop-shadow(0 0 2px rgba(255,255,255,0.1)); /* ロゴにわずかな影 */
 }
 
 /* クイックタブメニュー（ドロップダウン） */
 .quick-tabs-menu {
     position: absolute;
-    top: calc(100% + 10px); /* ヘッダーから少し離す */
+    top: calc(100% + 10px);
     right: 0;
     background: var(--surface-2);
     border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 8px; /* 角を丸く */
+    border-radius: 8px;
     padding: 10px 0;
     list-style: none;
     margin: 0;
-    min-width: 200px; /* 幅を広げる */
+    min-width: 200px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.4);
     z-index: 1100;
-    overflow: hidden; /* 角丸でメニュー項目がはみ出さないように */
+    overflow: hidden;
 }
 .quick-tabs-menu[hidden] { display: none; }
 .quick-tabs-menu li a {
-    display: flex; /* アイコンとテキストを横並びに */
+    display: flex;
     align-items: center;
-    padding: 12px 18px; /* パディングを増やす */
+    padding: 12px 18px;
     color: var(--text-primary);
     text-decoration: none;
     transition: background-color 0.25s ease, color 0.25s ease;
-    font-weight: 500; /* 少し軽めに */
+    font-weight: 500;
 }
-.quick-tabs-menu li a .fas { /* アイコンのスタイル */
+.quick-tabs-menu li a .fas {
     margin-right: 12px;
-    color: var(--accent); /* アイコンの色をアクセントカラーに */
+    color: var(--accent);
     font-size: 1.1em;
 }
 .quick-tabs-menu li a:hover,
@@ -122,25 +107,25 @@ header .container {
     color: var(--link-hover);
 }
 .quick-tabs-menu li a.active {
-    background: var(--accent); /* アクティブな項目はアクセントカラーに */
-    color: #fff; /* テキストは白 */
+    background: var(--accent);
+    color: #fff;
     font-weight: 700;
 }
 .quick-tabs-menu li a.active .fas {
-    color: #fff; /* アクティブなアイコンも白に */
+    color: #fff;
 }
 
 /* タブボタン (メニューアイコン) */
 .tab-button {
-    background: var(--accent); /* 背景をアクセントカラーに */
+    background: var(--accent);
     color: #fff;
     border: none;
-    padding: 10px 14px; /* パディングを調整 */
-    border-radius: 6px; /* 角を丸く */
+    padding: 10px 14px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 1.25rem;
     transition: background-color 0.25s ease, transform 0.1s ease;
-    display: flex; /* アイコンを中央に */
+    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -157,41 +142,59 @@ header .container {
 a:focus-visible,
 button:focus-visible {
     outline: 3px solid var(--link-hover);
-    outline-offset: 3px; /* オフセットを増やす */
-    border-radius: 4px; /* フォーカスリングの角を丸く */
+    outline-offset: 3px;
+    border-radius: 4px;
 }
 
 /* メインコンテンツ */
 section {
-    padding: 100px 0; /* セクションのパディングを増やす */
+    padding: 100px 0;
     position: relative;
     scroll-margin-top: var(--header-height);
 }
+/* セクションの背景色を交互に変更 */
+section:nth-of-type(even) {
+    background-color: var(--surface-1);
+}
+section:nth-of-type(odd) {
+    background-color: var(--page-bg);
+}
+
 
 h2 {
     color: var(--accent);
-    font-size: clamp(2.2rem, 4vw, 3.2rem); /* レスポンシブなフォントサイズ */
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
     font-weight: 700;
     font-family: 'Noto Serif JP', serif;
     text-align: center;
-    margin-bottom: 70px; /* マージンを増やす */
+    margin-bottom: 70px;
     letter-spacing: 0.03em;
-    text-shadow: 0 0 10px rgba(65, 160, 255, 0.2); /* わずかな光彩 */
+    text-shadow: 0 0 10px rgba(55, 110, 192, 0.2);
 }
+h2::after { /* 見出しの下のアクセントライン */
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--accent);
+    margin: 20px auto 0;
+    border-radius: 2px;
+}
+
 
 h3 {
     color: var(--text-primary);
     font-family: 'Noto Serif JP', serif;
     font-weight: 600;
-    font-size: 1.7rem; /* サイズ調整 */
+    font-size: 1.7rem;
     margin-top: 0;
     margin-bottom: 20px;
 }
 
 p {
     color: var(--text-secondary);
-    font-size: 1.05rem; /* 本文のサイズ調整 */
-    line-height: 1.8; /* 行間を広げる */
+    font-size: 1.05rem;
+    line-height: 1.8;
 }
 
 /* ヒーローセクション */
@@ -199,44 +202,43 @@ p {
     background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('https://image.pollinations.ai/prompt/Abstract%20futuristic%20digital%20network%20lines%20glowing%20blue%20and%20purple%20on%20a%20dark%20background,%20clean,%20modern,%20high%20tech') no-repeat center center/cover;
     text-align: center;
     margin-top: calc(-1 * var(--header-height));
-    padding: calc(180px + var(--header-height)) 0 150px 0; /* パディング調整 */
+    padding: calc(180px + var(--header-height)) 0 150px 0;
     color: #fff;
     min-height: 70vh;
-    display: flex; /* Flexboxでコンテンツを中央寄せ */
+    display: flex;
     align-items: center;
     justify-content: center;
 }
+#hero h2::after { display: none; }
+
 
 .hero-container {
-    max-width: 900px; /* ヒーロー内のコンテナを狭く */
+    max-width: 900px;
     text-align: center;
 }
 
 .hero-heading {
-    text-align: center; /* 中央寄せ */
-    font-family: 'Montserrat', sans-serif; /* Montserrat */
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     line-height: 1.2;
-    font-size: clamp(2.8rem, 5.5vw, 4.2rem); /* さらに大きく */
+    font-size: clamp(2.8rem, 5.5vw, 4.2rem);
     letter-spacing: 0.01em;
     margin: 0 0 35px 0;
     position: relative;
     color: #fff;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* 影を強く */
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 .hero-heading span { display: block; }
-.hero-heading::before {
-    display: none; /* 下線を削除 */
-}
 
 .hero-sub {
     margin-top: 25px;
-    text-align: center; /* 中央寄せ */
+    text-align: center;
     max-width: 800px;
     font-size: 1.15rem;
     line-height: 1.8;
     color: var(--text-secondary);
-    margin: 0 auto 40px auto; /* 下マージンを追加 */
+    margin: 0 auto 40px auto;
 }
 
 /* CTAボタン */
@@ -252,55 +254,39 @@ p {
     border-radius: 8px;
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(65, 160, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(55, 110, 192, 0.2);
 }
 .cta-button:hover {
     background-color: var(--accent-dark);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(65, 160, 255, 0.4);
+    box-shadow: 0 6px 20px rgba(55, 110, 192, 0.3);
 }
 .cta-button .fas {
     margin-left: 5px;
 }
 
-/* ヒーロー微細パターンをより繊細に */
-#hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(0,0,0,0.5) 100%),
-                repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 5px);
-    mix-blend-mode: overlay;
-    pointer-events: none;
-}
-
 /* 会社概要セクション */
-#about {
-    background-color: var(--surface-1);
-    color: var(--text-primary);
-}
-
 .about-content {
     display: flex;
-    flex-direction: row; /* デフォルトは横並び */
+    flex-direction: row;
     align-items: center;
-    gap: 60px; /* 間隔を広げる */
+    gap: 60px;
 }
 
 .about-image-wrapper {
-    flex-shrink: 0; /* 画像が縮まないように */
-    width: 45%; /* 画像の幅を調整 */
+    flex-shrink: 0;
+    width: 45%;
     max-width: 500px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    border-radius: 12px; /* 角丸を大きく */
-    overflow: hidden; /* 角丸の内側で画像がはみ出さないように */
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 .about-image {
     width: 100%;
     height: auto;
     display: block;
-    transition: transform 0.3s ease; /* ホバーエフェクト */
+    transition: transform 0.3s ease;
 }
 .about-image:hover {
     transform: scale(1.03);
@@ -311,7 +297,7 @@ p {
 }
 
 .strength-list {
-    list-style-type: none; 
+    list-style-type: none;
     padding-left: 0;
     margin-top: 30px;
 }
@@ -320,38 +306,34 @@ p {
     margin-bottom: 18px;
     color: var(--text-secondary);
     display: flex;
-    align-items: flex-start; /* テキストの上端に合わせる */
+    align-items: flex-start;
     line-height: 1.7;
 }
 .strength-list li strong {
-    color: var(--text-primary); /* 強調文字は明るく */
+    color: var(--text-primary);
     margin-right: 8px;
 }
 .strength-list li .fas {
     color: var(--accent);
-    margin-right: 15px; /* アイコンとテキストの間隔 */
+    margin-right: 15px;
     font-size: 1.2em;
-    flex-shrink: 0; /* アイコンが縮まないように */
-    margin-top: 4px; /* アイコンを少し下げる */
+    flex-shrink: 0;
+    margin-top: 4px;
 }
 
 /* サービスセクション */
-#services {
-    background-color: var(--page-bg);
-}
-
 .service-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* アイテムサイズ調整 */
-    gap: 35px; /* 間隔を広げる */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 35px;
 }
 
 .service-item {
     background: var(--surface-2);
-    padding: 35px; /* パディングを増やす */
-    border-radius: 10px; /* 角丸を大きく */
+    padding: 35px;
+    border-radius: 10px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-color-dark);
     text-align: center;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -360,20 +342,19 @@ p {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* サービスアイコン */
 .service-item .service-icon {
-    font-size: 3.5rem; /* アイコンサイズを大きく */
+    font-size: 3.5rem;
     color: var(--accent);
     margin-bottom: 20px;
     display: block;
     text-align: center;
-    width: auto; /* widthをautoに */
-    height: auto; /* heightをautoに */
-    line-height: 1; /* 行の高さを調整 */
+    width: auto;
+    height: auto;
+    line-height: 1;
 }
 
 .service-item h3 {
-    color: var(--text-primary); /* サービス見出しの色 */
+    color: var(--text-primary);
     font-size: 1.8rem;
     margin-bottom: 15px;
 }
@@ -383,10 +364,6 @@ p {
 }
 
 /* 実績セクション */
-#projects {
-    background-color: var(--surface-1);
-}
-
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -396,9 +373,10 @@ p {
 .project-item {
     background: var(--surface-2);
     padding: 30px;
-    border-left: 5px solid var(--accent); /* ボーダーを太く */
+    border-left: 5px solid var(--accent);
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color-dark);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .project-item:hover {
@@ -422,14 +400,7 @@ p {
     color: var(--text-secondary);
 }
 
-
 /* お問い合わせセクション */
-#contact {
-    background-color: var(--page-bg);
-    text-align: center;
-    padding-bottom: 80px;
-}
-
 .contact-description {
     max-width: 700px;
     margin: 0 auto 60px auto;
@@ -459,26 +430,30 @@ p {
     display: flex;
     align-items: center;
 }
-.contact-info li strong {
-    color: var(--text-primary);
-    margin-right: 8px;
-}
 .contact-info li .fas,
 .contact-info li .fab {
     color: var(--accent);
     margin-right: 15px;
     font-size: 1.2em;
-    width: 25px; /* アイコンの幅を揃える */
+    width: 25px;
     text-align: center;
 }
 
+.contact-info li strong {
+    display: inline-block;
+    min-width: 110px;
+    color: var(--text-primary);
+    margin-right: 8px;
+}
+
+
 .contact-info a {
     color: var(--accent);
-    text-decoration: none; /* 下線をなくす */
+    text-decoration: none;
     position: relative;
     transition: color 0.3s ease;
 }
-.contact-info a::after { /* ホバー時の下線アニメーション */
+.contact-info a::after {
     content: '';
     position: absolute;
     left: 0;
@@ -500,7 +475,6 @@ p {
     height: auto;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    filter: brightness(0.9); /* 少し暗くして統一感を出す */
 }
 
 
@@ -510,15 +484,15 @@ footer {
     color: var(--text-secondary);
     text-align: center;
     padding: 25px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid var(--border-color-dark);
     font-size: 0.95rem;
 }
 
 /* アニメーション */
 .fade-in-section {
     opacity: 0;
-    transform: translateY(30px); /* 少し大きく動かす */
-    transition: opacity 1.2s ease-out, transform 1.2s ease-out; /* 変化を滑らかに */
+    transform: translateY(30px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 }
 
 .visible {
@@ -588,7 +562,7 @@ html { scroll-behavior: smooth; }
     .about-image-wrapper,
     .contact-image {
         width: 100%;
-        max-width: 600px; /* スマートフォンでも大きすぎないように */
+        max-width: 600px;
         margin: 0 auto;
     }
     .about-text,
@@ -598,7 +572,7 @@ html { scroll-behavior: smooth; }
     }
     .service-grid,
     .project-grid {
-        grid-template-columns: 1fr; /* 1列表示 */
+        grid-template-columns: 1fr;
     }
     .service-item,
     .project-item {
@@ -617,11 +591,8 @@ html { scroll-behavior: smooth; }
 }
 
 @media (max-width: 480px) {
-    .logo {
-        font-size: 1.5rem;
-    }
     .logo img {
-        height: 28px;
+        height: 40px;
     }
     .tab-button {
         padding: 8px 12px;
@@ -637,15 +608,18 @@ html { scroll-behavior: smooth; }
         font-size: 0.95rem;
     }
     .cta-button {
-        width: 100%; /* ボタンを全幅に */
+        width: 100%;
         box-sizing: border-box;
         text-align: center;
-        justify-content: center; /* 中央寄せ */
+        justify-content: center;
     }
     .strength-list li {
         font-size: 0.95rem;
     }
     .contact-info li {
         font-size: 1rem;
+    }
+    .contact-info li strong {
+        min-width: 90px;
     }
 }
