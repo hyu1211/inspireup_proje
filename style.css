@@ -15,6 +15,7 @@
     --color-shadow-light: rgba(0,0,0,0.2); /* 軽い影 */
     --color-shadow-medium: rgba(0,0,0,0.3); /* 中間の影 */
     --color-shadow-heavy: rgba(0,0,0,0.4); /* 濃い影 */
+    --color-white: #FFFFFF;
 
     /* レイアウト */
     --header-height: 100px; /* ヘッダーの基準高さ */
@@ -176,10 +177,11 @@ section {
     position: relative;
     scroll-margin-top: var(--header-height); /* スクロール時の固定ヘッダー対策 */
 }
-section:nth-of-type(even) { /* 偶数番目のセクションの背景色 */
+/* 通常の背景色 */
+section:not(.background-section):nth-of-type(even) { /* 偶数番目のセクションの背景色 */
     background-color: var(--color-secondary-bg);
 }
-section:nth-of-type(odd) { /* 奇数番目のセクションの背景色 */
+section:not(.background-section):nth-of-type(odd) { /* 奇数番目のセクションの背景色 */
     background-color: var(--color-primary-bg);
 }
 
@@ -204,6 +206,15 @@ h2::after { /* 下線 */
     border-radius: 2px;
 }
 
+/* 背景画像があるセクションのH2 */
+h2.section-title-white {
+    color: var(--color-white); /* 白文字 */
+    text-shadow: 0 0 15px rgba(0,0,0,0.5); /* 読みやすくするための影 */
+}
+h2.section-title-white::after {
+    background-color: var(--color-white);
+}
+
 h3 {
     color: var(--color-text-primary);
     font-family: var(--font-family-heading);
@@ -225,22 +236,43 @@ p {
 
 /* ヒーローセクション */
 #hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('https://image.pollinations.ai/prompt/Abstract%20digital%20network%20lines%20and%20dots,%20glowing%20blue%20and%20purple%20on%20a%20dark%20background,%20clean,%20modern,%20high%20tech,%20blurred%20background%20for%20text%20readability') no-repeat center center/cover;
+    position: relative;
     text-align: center;
     margin-top: calc(-1 * var(--header-height)); /* ヘッダー分上に詰める */
     padding: calc(180px + var(--header-height)) 0 150px 0; /* ヘッダー分を考慮したパディング */
-    color: #fff;
-    min-height: 70vh;
+    min-height: 85vh; /* 画面の85% */
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden; /* パララックス背景がはみ出さないように */
 }
-#hero h2::after { display: none; } /* ヒーロー内のH2には下線不要 */
 
+/* パララックス背景 */
+.hero-parallax-bg {
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed; /* パララックス効果 */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* 暗いオーバーレイ */
+    z-index: 1;
+}
 
 .hero-container {
+    position: relative;
+    z-index: 2;
     max-width: 900px;
     text-align: center;
+    color: #fff;
 }
 
 .hero-heading {
@@ -248,14 +280,34 @@ p {
     font-family: var(--font-family-hero);
     font-weight: 800;
     line-height: 1.2;
-    font-size: clamp(2.8rem, 5.5vw, 4.2rem);
-    letter-spacing: 0.01em;
+    font-size: clamp(2.8rem, 5.5vw, 4.8rem); /* さらに大きく */
+    letter-spacing: 0.02em;
     margin: 0 0 35px 0;
     position: relative;
     color: #fff;
-    text-shadow: 0 4px 15px var(--color-shadow-heavy);
+    text-shadow: 0 4px 20px var(--color-shadow-heavy);
+    overflow: hidden; /* spanのアニメーション用 */
 }
-.hero-heading span { display: block; } /* 複数行に分けるための表示 */
+.hero-heading span {
+    display: block; /* 複数行に分けるための表示 */
+    opacity: 0;
+    transform: translateY(30px);
+    animation: textSlideUp 1.0s ease-out forwards;
+}
+.hero-heading span:nth-child(2) { animation-delay: 0.2s; }
+.hero-heading span:nth-child(3) { animation-delay: 0.4s; }
+
+.hero-heading .highlight {
+    color: var(--color-accent); /* ハイライトカラー */
+    text-shadow: 0 0 15px rgba(55, 110, 192, 0.8);
+}
+
+@keyframes textSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 .hero-sub {
     margin-top: 25px;
@@ -266,12 +318,51 @@ p {
     color: var(--color-text-secondary);
     margin-left: auto;
     margin-right: auto;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: textFadeIn 1.0s ease-out forwards;
+    animation-delay: 0.8s;
+}
+@keyframes textFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+#hero h2::after { display: none; } /* ヒーロー内のH2には下線不要 */
+
+
+/* 背景画像を持つセクションの共通スタイル */
+.background-section {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    color: var(--color-white); /* テキストを白に */
+    padding-top: calc(var(--section-padding-y) + 30px); /* H2の下線分を考慮 */
+    padding-bottom: var(--section-padding-y);
+}
+.section-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75); /* より濃いオーバーレイ */
+    z-index: 0;
+}
+.background-section .container {
+    position: relative;
+    z-index: 1;
+}
+.background-section p {
+    color: rgba(255,255,255,0.85); /* 背景に合わせてテキストも明るく */
+}
+.background-section h3 {
+    color: var(--color-white);
 }
 
 /* 会社情報セクション (#company-info) */
-#company-info {
-    background-color: var(--color-secondary-bg); /* 偶数セクションの背景色 */
-}
 .company-info-content {
     display: flex;
     flex-direction: row;
@@ -292,7 +383,7 @@ p {
 .company-section h3 {
     font-size: clamp(1.6rem, 3vw, 2rem);
     margin-bottom: 15px;
-    color: var(--color-accent);
+    color: var(--color-accent); /* 背景が暗いのでアクセントカラーはそのまま */
 }
 .company-section p {
     margin-bottom: 15px;
@@ -304,7 +395,7 @@ p {
 }
 .company-section ul li {
     font-size: var(--font-size-base);
-    color: var(--color-text-primary);
+    color: var(--color-white); /* 白文字 */
     margin-bottom: 10px;
     position: relative;
     padding-left: 25px;
@@ -320,7 +411,7 @@ p {
     font-size: 0.9em;
 }
 .company-section ul li strong {
-    color: var(--color-text-primary);
+    color: var(--color-white); /* 白文字 */
 }
 
 
@@ -333,6 +424,16 @@ p {
     overflow: hidden;
     position: relative;
     text-align: center;
+    /* 新しいスタイル */
+    border: 3px solid var(--color-accent); /* 強調 */
+    transform: rotate(2deg); /* 少し回転させて遊び心を */
+    margin-top: 20px; /* テキストとのアライメント調整 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* ホバー効果削除のため調整 */
+}
+/* ホバー効果削除 */
+.company-image-wrapper:hover {
+    transform: rotate(2deg); /* ホバー時の回転を維持 */
+    box-shadow: 0 10px 30px var(--color-shadow-heavy); /* ホバー時の影を維持 */
 }
 
 .company-image {
@@ -341,11 +442,13 @@ p {
     display: block;
     transition: transform 0.3s ease;
 }
+/* ホバー効果削除 */
 .company-image:hover {
-    transform: scale(1.03);
+    transform: scale(1); /* ホバー時の拡大を削除 */
 }
 
-.image-caption {
+/* 画像キャプション削除により不要 */
+/* .image-caption {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -356,7 +459,7 @@ p {
     margin: 0;
     font-size: var(--font-size-small);
     font-weight: 500;
-}
+} */
 
 
 /* 私たちの強みセクション (#strengths) - スタイリッシュな箇条書き */
@@ -379,12 +482,14 @@ p {
     gap: 25px;
     padding: 20px;
     border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* ホバー効果削除 */
+    transition: none; /* トランジションを無効化 */
 }
+/* ホバー効果削除 */
 .strength-list-item:hover {
-    background-color: var(--color-tertiary-bg);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px var(--color-shadow-medium);
+    background-color: transparent; /* ホバー時の背景色を透明に */
+    transform: none; /* ホバー時の変形を無効化 */
+    box-shadow: none; /* ホバー時の影を無効化 */
 }
 
 .strength-icon-bullet {
@@ -409,10 +514,6 @@ p {
 
 
 /* 提供できる価値（ソリューション）セクション (#services) - アイコン強調グリッド */
-#services {
-    background-color: var(--color-secondary-bg);
-}
-
 .service-grid-new {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -421,26 +522,38 @@ p {
 }
 
 .service-item-new {
-    background: var(--color-tertiary-bg);
+    background: rgba(var(--color-tertiary-bg-rgb), 0.8); /* 透明度を少し加える */
+    backdrop-filter: blur(5px); /* 背景を少しぼかす */
     padding: 35px;
     border-radius: 12px;
     box-shadow: 0 6px 20px var(--color-shadow-medium);
-    border: 1px solid var(--color-border);
+    border: 1px solid rgba(var(--color-border-rgb), 0.5); /* 透明度を少し加える */
     text-align: center;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: var(--color-white); /* テキストを白に */
 }
 .service-item-new:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 30px var(--color-shadow-heavy);
+    background: rgba(var(--color-tertiary-bg-rgb), 0.9); /* ホバー時は少し濃く */
 }
+
+/* H3とPタグの色を調整 */
+.service-item-new h3 {
+    color: var(--color-white);
+}
+.service-item-new p {
+    color: rgba(255,255,255,0.85);
+}
+
 
 .service-icon-new-wrapper {
     width: 80px; /* アイコンを囲む円のサイズ */
     height: 80px;
-    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark)); /* グラデーション */
+    background: linear-gradient(135deg, #4FA4F8, #2B6CB0); /* より鮮やかなグラデーション */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -452,7 +565,7 @@ p {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .service-item-new:hover .service-icon-new-wrapper {
-    transform: scale(1.05);
+    transform: scale(1.05) rotate(5deg); /* ホバー時に少し回転 */
     box-shadow: 0 6px 20px rgba(0,0,0,0.6);
 }
 
@@ -552,26 +665,35 @@ p {
 
 
 /* お問い合わせセクション */
+.contact-compact { /* 新しいコンテナクラス */
+    text-align: center; /* 中央寄せ */
+    max-width: 700px; /* 少し狭く */
+    margin: 0 auto;
+}
+
 .contact-description {
     max-width: 65ch;
     margin: 0 auto 60px auto;
     font-size: var(--font-size-large);
 }
 
-.contact-details {
+/* contact-details は削除されたため不要 */
+/* .contact-details {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 60px;
     max-width: 900px;
     margin: 0 auto;
-}
+} */
 
 .contact-info {
     list-style: none;
     padding: 0;
-    text-align: left;
-    flex: 1;
+    /* text-align: left; */ /* 中央寄せに変更 */
+    display: inline-block; /* リストを中央寄せにするため */
+    text-align: left; /* 各リスト項目は左寄せ */
+    margin-top: 40px; /* 上部にスペース */
 }
 
 .contact-info li {
@@ -621,12 +743,13 @@ p {
     width: 100%;
 }
 
-.contact-image {
+/* お問い合わせ画像削除により不要 */
+/* .contact-image {
     max-width: 400px;
     height: auto;
     border-radius: 12px;
     box-shadow: 0 10px 30px var(--color-shadow-heavy);
-}
+} */
 
 
 /* ========================================= */
@@ -691,6 +814,9 @@ html { scroll-behavior: smooth; }
         transform: none;
         opacity: 1;
     }
+    .hero-parallax-bg {
+        background-attachment: scroll; /* パララックス無効化 */
+    }
 }
 
 /* ========================================= */
@@ -713,10 +839,13 @@ html { scroll-behavior: smooth; }
     .hero-sub {
         font-size: 1rem;
     }
+    .background-section {
+        background-attachment: scroll; /* モバイルではパララックス無効 */
+    }
+
 
     /* 会社情報セクション */
-    .company-info-content,
-    .contact-details {
+    .company-info-content {
         flex-direction: column;
         gap: 40px;
     }
@@ -725,6 +854,10 @@ html { scroll-behavior: smooth; }
         width: 100%;
         max-width: 600px;
         margin: 0 auto 30px auto;
+        transform: rotate(0deg); /* 回転をなくす */
+    }
+    .company-image-wrapper:hover {
+        transform: scale(1); /* ホバー時の拡大を削除 */
     }
     .company-text {
         width: 100%;
@@ -736,12 +869,14 @@ html { scroll-behavior: smooth; }
     .company-section h3 {
         font-size: clamp(1.4rem, 3.5vw, 1.7rem);
     }
-    .contact-image {
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
+    /* お問い合わせセクション */
+    .contact-compact {
+        text-align: center;
     }
-
+    .contact-info {
+        text-align: left; /* 各リスト項目は左寄せを維持 */
+        display: block; /* ブロック要素にして幅いっぱいに */
+    }
 
     /* 強みセクション */
     .strength-list {
@@ -850,4 +985,10 @@ html { scroll-behavior: smooth; }
     .strength-icon-bullet {
         margin-bottom: 10px;
     }
+}
+
+/* 変数RGB値の定義 (rgbaで使用するため) */
+:root {
+    --color-tertiary-bg-rgb: 39, 58, 79;
+    --color-border-rgb: 255, 255, 255;
 }
