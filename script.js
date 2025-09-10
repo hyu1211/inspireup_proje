@@ -66,6 +66,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // スクロール方向でヘッダーをフェードイン/アウト
+    const headerEl = document.querySelector('header');
+    if (headerEl) {
+        let lastY = window.scrollY;
+        let ticking = false;
+        const handleScroll = () => {
+            const currentY = window.scrollY;
+            const goingDown = currentY > lastY;
+            const beyond = currentY > 10; // 少しスクロールしたら適用
+            if (goingDown && beyond) {
+                headerEl.classList.add('header-hidden');
+            } else {
+                headerEl.classList.remove('header-hidden');
+            }
+            lastY = currentY;
+            ticking = false;
+        };
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(handleScroll);
+                ticking = true;
+            }
+        }, { passive: true });
+    }
+
     // 現在地ハイライト
     const sections = document.querySelectorAll('main section[id]');
     const navLinks = document.querySelectorAll('#main-nav a[href^="#"]');

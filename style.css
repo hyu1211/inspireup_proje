@@ -3,8 +3,21 @@ body {
     font-family: "Noto Sans JP", sans-serif;
     line-height: 1.7;
     margin: 0;
-    color: #f8f9fa; /* 基本の文字色を明るめに */
-    background-color: #212529; /* 基本の背景色を暗めに */
+    color: var(--text-primary);
+    background-color: var(--page-bg);
+}
+
+/* レイアウト用の共通サイズ */
+:root {
+    --header-height: 80px;
+    /* カラーパレット（ヘッダ基調） */
+    --header-bg: #00234D;
+    --page-bg: #001A33;
+    --surface-1: #0A2A4A;
+    --surface-2: #0F335C;
+    --text-primary: #E9ECEF;
+    --text-secondary: #CED4DA;
+    --accent: #36B4FF;
 }
 
 .container {
@@ -15,7 +28,7 @@ body {
 
 /* ヘッダー */
 header {
-    background: #00234D; /* ロゴ背景色と完全一致 */
+    background: var(--header-bg); /* ロゴ背景色と完全一致 */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); /* シャドウを少し強めに */
     padding: 15px 0;
     position: sticky;
@@ -24,6 +37,8 @@ header {
     display: flex; /* Flexboxを使い、要素の配置を柔軟に */
     align-items: center; /* 垂直方向の中央揃え */
     justify-content: center; /* 中身のコンテナを中央に */
+    transition: transform 0.32s ease, opacity 0.32s ease; /* フェード/スライド */
+    will-change: transform, opacity;
 }
 
 /* ヘッダー内のコンテナで左右端に配置 */
@@ -32,6 +47,12 @@ header .container {
     align-items: center;
     justify-content: space-between;
     width: 100%;
+}
+
+/* スクロールで隠す状態 */
+.header-hidden {
+    transform: translateY(-100%);
+    opacity: 0;
 }
 
 .left-tools {
@@ -103,10 +124,10 @@ header .container {
     background: transparent; /* 背景なしでヘッダーになじませる */
     color: #e9ecef;
     border: none; /* 枠線なし */
-    padding: 8px 10px; /* タップ領域は確保 */
+    padding: 12px 16px; /* 少し大きく */
     border-radius: 0;
     cursor: pointer;
-    font-size: 1.1rem; /* ☰ の視認性を維持 */
+    font-size: 1.4rem; /* 大きく */
     font-weight: 700;
     transition: color 0.2s ease, opacity 0.2s ease;
 }
@@ -157,19 +178,21 @@ button:focus-visible {
 section {
     padding: 80px 0;
     position: relative;
-    scroll-margin-top: 80px;
+    scroll-margin-top: var(--header-height);
 }
 
 h2 {
-    color: #007bff; /* セクション見出しのアクセントカラー */
+    color: var(--accent); /* セクション見出しのアクセントカラー */
     font-size: 2.2rem;
     font-weight: 700;
+    font-family: 'Noto Serif JP', serif; /* 明朝体 */
     text-align: center;
     margin-bottom: 50px;
 }
 
 h3 {
     color: #e9ecef; /* 小見出しの色 */
+    font-family: 'Noto Serif JP', serif; /* 明朝体 */
 }
 
 /* ヒーローセクション */
@@ -177,27 +200,79 @@ h3 {
     /* 背景画像を横長のものに更新 */
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://image.pollinations.ai/prompt/abstract%20light%20line%20upward%20horizontal%20stylish%20dark%20background') no-repeat center center/cover;
     text-align: center;
-    padding: 150px 0;
+    /* ヘッダーの裏まで伸ばす */
+    margin-top: calc(-1 * var(--header-height));
+    padding: calc(220px + var(--header-height)) 0 200px 0; /* 下部を少し削る */
     color: #fff; /* 文字色を白に */
+    min-height: 68vh; /* セクションをやや小さく */
 }
 
+.hero-container {
+    max-width: 1100px;
+}
+
+.hero-heading {
+    text-align: left;
+    font-family: 'Noto Serif JP', serif; /* 明朝体 */
+    font-weight: 800;
+    line-height: 1.15;
+    font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+    letter-spacing: 0.02em;
+    margin: 0 0 28px 0;
+    position: relative;
+}
+.hero-heading span { display: block; }
+.hero-heading::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -14px;
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent) 0%, #8ad7ff 100%);
+    border-radius: 2px;
+}
+
+.hero-sub {
+    margin-top: 36px;
+    text-align: left;
+    max-width: 760px;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: var(--text-secondary);
+}
+
+/* ヒーロー微細パターン（暗いドットの流れ） */
+#hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(transparent 60%, rgba(0,0,0,0.35) 100%),
+                repeating-linear-gradient(135deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 6px);
+    mix-blend-mode: overlay;
+    pointer-events: none;
+}
 .hero-text {
-    font-size: 3rem; /* 少し大きく */
-    font-weight: 700;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* 文字に影をつけて視認性アップ */
+    font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+    letter-spacing: 0.02em;
+    font-size: 3.2rem; /* さらに大きく */
+    font-weight: 800;
+    margin-bottom: 24px;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.65); /* 文字に影をつけて視認性アップ */
 }
 
 #hero p {
-    font-size: 1.3rem; /* 少し大きく */
-    max-width: 700px;
+    font-size: 1.25rem;
+    line-height: 1.9;
+    max-width: 760px;
     margin: 0 auto;
+    color: var(--text-secondary);
 }
 
 /* 会社概要セクション */
 #about {
-    background-color: #343a40; /* 背景色を少し明るめの黒に */
-    color: #f8f9fa; /* 文字色 */
+    background-color: var(--surface-1);
+    color: var(--text-primary);
 }
 
 .about-content {
@@ -229,7 +304,7 @@ h3 {
 
 /* サービスセクション */
 #services {
-    background-color: #212529; /* 背景色 */
+    background-color: var(--page-bg); /* 背景色 */
 }
 
 .service-grid {
@@ -239,11 +314,11 @@ h3 {
 }
 
 .service-item {
-    background: #343a40; /* 各アイテムの背景色 */
+    background: var(--surface-1); /* 各アイテムの背景色 */
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* シャドウ */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* わずかな境界線 */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* わずかな境界線 */
 }
 
 /* サービスアイコン */
@@ -256,24 +331,24 @@ h3 {
 }
 
 .service-item h3 {
-    color: #007bff; /* アクセントカラー */
+    color: var(--accent); /* アクセントカラー */
     margin-top: 0;
 }
 
 .service-item p {
-    color: #ced4da; /* 文字色 */
+    color: var(--text-secondary); /* 文字色 */
 }
 
 /* 実績セクション */
 #projects {
-    background-color: #343a40; /* 背景色 */
-    color: #f8f9fa; /* 文字色 */
+    background-color: var(--surface-1); /* 背景色 */
+    color: var(--text-primary); /* 文字色 */
 }
 
 .project-item {
-    background: #212529; /* 各アイテムの背景色 */
+    background: var(--surface-2); /* 各アイテムの背景色 */
     padding: 20px;
-    border-left: 4px solid #007bff; /* アクセントカラーのボーダー */
+    border-left: 4px solid var(--accent); /* アクセントカラーのボーダー */
     margin-bottom: 20px;
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -284,14 +359,14 @@ h3 {
 }
 
 .project-item p {
-    color: #ced4da; /* 文字色 */
+    color: var(--text-secondary); /* 文字色 */
 }
 
 
 /* お問い合わせセクション */
 #contact {
-    background-color: #1a1a1a; /* さらに濃い背景色 */
-    color: #f8f9fa; /* 文字色 */
+    background-color: var(--page-bg); /* さらに濃い背景色 */
+    color: var(--text-primary); /* 文字色 */
     text-align: center;
     padding-bottom: 50px; /* フッターとの間隔 */
 }
@@ -305,25 +380,25 @@ h3 {
 
 .contact-info li {
     margin-bottom: 15px;
-    color: #ced4da; /* リスト項目の色 */
+    color: var(--text-secondary); /* リスト項目の色 */
     font-size: 1.1rem;
 }
 
 .contact-info a {
-    color: #007bff; /* リンクのアクセントカラー */
+    color: var(--accent); /* リンクのアクセントカラー */
     text-decoration: underline;
     transition: color 0.3s;
 }
 
 .contact-info a:hover {
-    color: #0056b3;
+    color: #78cfff;
 }
 
 
 /* フッター */
 footer {
-    background-color: #1a1a1a; /* ヘッダーと同じ濃い色 */
-    color: #ced4da; /* 文字色 */
+    background-color: var(--surface-2); /* ヘッダーと同じ濃い色 */
+    color: var(--text-secondary); /* 文字色 */
     text-align: center;
     padding: 20px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.05); /* 上部に細い線 */
