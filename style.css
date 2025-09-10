@@ -65,7 +65,7 @@ header .container {
 }
 
 .logo img {
-    height: 80px;
+    height: 75px;
     width: auto;
     display: block;
 }
@@ -152,7 +152,6 @@ section {
     position: relative;
     scroll-margin-top: var(--header-height);
 }
-/* セクションの背景色を交互に変更 */
 section:nth-of-type(even) {
     background-color: var(--surface-1);
 }
@@ -171,7 +170,7 @@ h2 {
     letter-spacing: 0.03em;
     text-shadow: 0 0 10px rgba(55, 110, 192, 0.2);
 }
-h2::after { /* 見出しの下のアクセントライン */
+h2::after {
     content: '';
     display: block;
     width: 60px;
@@ -234,35 +233,12 @@ p {
 .hero-sub {
     margin-top: 25px;
     text-align: center;
-    max-width: 800px;
+    max-width: 65ch; /* 文字数で幅を制御 */
     font-size: 1.15rem;
     line-height: 1.8;
     color: var(--text-secondary);
-    margin: 0 auto 40px auto;
-}
-
-/* CTAボタン */
-.cta-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background-color: var(--accent);
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.1rem;
-    padding: 15px 30px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(55, 110, 192, 0.2);
-}
-.cta-button:hover {
-    background-color: var(--accent-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(55, 110, 192, 0.3);
-}
-.cta-button .fas {
-    margin-left: 5px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* 会社概要セクション */
@@ -370,16 +346,28 @@ p {
     gap: 30px;
 }
 
+/* 実績リンクのスタイル */
+.project-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
 .project-item {
     background: var(--surface-2);
     padding: 30px;
     border-left: 5px solid var(--accent);
-    border-radius: 8px;
+    border-radius: 8px; /* 角丸は内部要素にも適用 */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     border: 1px solid var(--border-color-dark);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    height: 100%; /* aタグの高さいっぱいに広がるように */
+    box-sizing: border-box; /* paddingを含めた高さ計算 */
 }
-.project-item:hover {
+
+/* ホバーエフェクトをリンク側に移動 */
+.project-link:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
@@ -402,7 +390,7 @@ p {
 
 /* お問い合わせセクション */
 .contact-description {
-    max-width: 700px;
+    max-width: 65ch; /* 文字数で幅を制御 */
     margin: 0 auto 60px auto;
     font-size: 1.1rem;
 }
@@ -578,10 +566,6 @@ html { scroll-behavior: smooth; }
     .project-item {
         padding: 25px;
     }
-    .cta-button {
-        font-size: 1rem;
-        padding: 12px 25px;
-    }
     #hero {
         padding: calc(150px + var(--header-height)) 0 100px 0;
     }
@@ -606,12 +590,6 @@ html { scroll-behavior: smooth; }
     }
     .hero-sub {
         font-size: 0.95rem;
-    }
-    .cta-button {
-        width: 100%;
-        box-sizing: border-box;
-        text-align: center;
-        justify-content: center;
     }
     .strength-list li {
         font-size: 0.95rem;
