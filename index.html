@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Montserrat:wght@600;700;800&family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="style.css">
     <meta name="description" content="DX推進とAI導入で業務効率化・自動化を支援。迅速な実装と高いコストパフォーマンスで企業の未来を加速します。">
     <meta property="og:title" content="Inspire Up - DXとAI導入で企業成長を加速">
@@ -17,69 +17,83 @@
     <meta property="og:image" content="https://example.com/og.jpg">
 </head>
 <body>
-
-    <a class="skip-link" href="#main">メインコンテンツへ移動</a>
-
     <header>
         <div class="container">
-            <div class="left-tools">
-                <h1 class="logo">
+            <div class="header-content">
+                <div class="logo">
                     <img src="https://res.cloudinary.com/dagugihav/image/upload/v1757517547/Adobe_Express_-_file_hnnryx.png" alt="Inspire Up ロゴ">
-                </h1>
-            </div>
-            <div class="right-tools">
-                <button id="quick-tabs" class="tab-button" aria-label="メニュー" aria-haspopup="true" aria-expanded="false" aria-controls="quick-tabs-menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <ul id="quick-tabs-menu" class="quick-tabs-menu" role="menu" hidden>
-                    <li role="none"><a role="menuitem" href="#hero"><i class="fas fa-home"></i> ホーム</a></li>
-                    <li role="none"><a role="menuitem" href="#company-info"><i class="fas fa-building"></i> 会社情報</a></li>
-                    <li role="none"><a role="menuitem" href="#strengths"><i class="fas fa-star"></i> 私たちの強み</a></li>
-                    <li role="none"><a role="menuitem" href="#services"><i class="fas fa-cogs"></i> サービス</a></li>
-                    <li role="none"><a role="menuitem" href="#projects"><i class="fas fa-laptop-code"></i> 実績</a></li>
-                    <li role="none"><a role="menuitem" href="#contact"><i class="fas fa-envelope"></i> お問い合わせ</a></li>
-                </ul>
+                </div>
+                <nav>
+                    <button class="nav-toggle" aria-label="メニューを開く">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="nav-menu">
+                        <li><a href="#hero">ホーム</a></li>
+                        <li><a href="#company-info">会社情報</a></li>
+                        <li><a href="#strengths">強み</a></li>
+                        <li><a href="#services">サービス</a></li>
+                        <li><a href="#projects">実績</a></li>
+                        <li><a href="#contact">お問い合わせ</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </header>
 
-    <main id="main">
-        <section id="hero" class="fade-in-section hero-parallax-bg" style="background-image: url('https://res.cloudinary.com/dagugihav/image/upload/v1757525141/building-6528075_1280_lufgnv.jpg');">
-            <div class="hero-overlay"></div>
-            <div class="container hero-container">
-                <h2 class="hero-heading">
-                    <span>DX推進と</span>
-                    <span>AI導入で</span>
-                    <span class="highlight">企業の未来を加速する</span>
-                </h2>
-                <p class="hero-sub">私たちは、企業のDX推進、AI導入、業務自動化・効率化を支援し<br>ビジネスの持続的な成長をサポートします。</p>
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">✨ 企業のDX推進パートナー</div>
+                    <h1 class="hero-title">
+                        <span class="gradient-text">DX推進とAI導入</span>で<br>
+                        企業の未来を加速する
+                    </h1>
+                    <p class="hero-subtitle">
+                        私たちは、企業のDX推進、AI導入、業務自動化・効率化を支援し、ビジネスの持続的な成長をサポートします。
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-rocket"></i>
+                            今すぐ相談する
+                        </a>
+                        <a href="#services" class="btn btn-secondary">
+                            <i class="fas fa-play"></i>
+                            サービスを見る
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="company-info" class="fade-in-section background-section" style="background-image: url('https://res.cloudinary.com/dagugihav/image/upload/v1757525196/building-9761776_1280_dtm1kl.jpg');">
-            <div class="section-overlay"></div>
+        <section id="company-info" class="section company-info fade-in">
             <div class="container">
-                <h2 class="section-title-white">会社情報</h2>
-                <div class="company-info-content">
-                    <div class="company-text">
-                        <div class="company-section">
-                            <h3>企業概要</h3>
+                <h2 class="section-title">会社情報</h2>
+                <div class="company-grid">
+                    <div class="company-content">
+                        <div class="company-card">
+                            <h3><i class="fas fa-building"></i> 企業概要</h3>
                             <p>Inspire Upは、DX推進とAI導入を通じて企業の変革を支援するプロフェッショナル集団です。私たちは、最先端技術と豊富な専門知識を組み合わせ、実践的なソリューションを提供し、お客様の持続的な成長をサポートします。</p>
                         </div>
-                        <div class="company-section">
-                            <h3>メンバー構成</h3>
+
+                        <div class="company-card">
+                            <h3><i class="fas fa-users"></i> メンバー構成</h3>
                             <p>現在、法人化の手続き中であり、熱意ある3名のメンバーで活動中です。若さと高い知見を活かし、お客様のビジネスに新たな価値を創造します。</p>
-                            <ul>
+                            <ul class="member-list">
                                 <li><strong>代表者:</strong> 田原 快</li>
                                 <li><strong>学歴:</strong> 早稲田大学 先進理工学部 在学中</li>
-                                <!-- <li><strong>その他:</strong> 42 Tokyo卒業、Mensa会員</li> -->
-                            </ul>
-                            <ul>
                                 <li><strong>その他のメンバー:</strong> 東京大学大学院生１名、早稲田大学在学中１名</li>
                             </ul>
                         </div>
-                        <div class="company-section">
-                            <h3>ビジョン</h3>
+
+                        <div class="company-card">
+                            <h3><i class="fas fa-eye"></i> ビジョン</h3>
                             <p>「テクノロジーの力で、企業の潜在能力を最大限に引き出す」ことをミッションとしています。革新的なDX・AIソリューションを通じて、社会全体の発展に貢献します。</p>
                         </div>
                     </div>
@@ -90,69 +104,87 @@
             </div>
         </section>
 
-        <section id="strengths" class="fade-in-section">
+        <section id="strengths" class="section fade-in">
             <div class="container">
-                <h2>私たちの強み</h2>
-                <ul class="strength-list">
-                    <li class="strength-list-item">
-                        <i class="fas fa-lightbulb strength-icon-bullet"></i>
-                        <div class="strength-list-content">
-                            <h3>最新技術への高い適応力</h3>
-                            <p>常に最新のAI・DX技術を学び、実際のビジネス課題に応用しています。</p>
+                <h2 class="section-title">私たちの強み</h2>
+                <p class="section-subtitle">少数精鋭チームだからこそ実現できる、独自の価値提案をお届けします</p>
+                <div class="strengths-grid">
+                    <div class="strength-card">
+                        <div class="strength-icon">
+                            <i class="fas fa-lightbulb"></i>
                         </div>
-                    </li>
-                    <li class="strength-list-item">
-                        <i class="fas fa-rocket strength-icon-bullet"></i>
-                        <div class="strength-list-content">
-                            <h3>柔軟かつスピーディーな開発</h3>
-                            <p>少数精鋭チームならではのフットワークで、要望に迅速かつ的確に対応可能です。</p>
+                        <h3>最新技術への高い適応力</h3>
+                        <p>常に最新のAI・DX技術を学び、実際のビジネス課題に応用しています。</p>
+                    </div>
+
+                    <div class="strength-card">
+                        <div class="strength-icon">
+                            <i class="fas fa-rocket"></i>
                         </div>
-                    </li>
-                    <li class="strength-list-item">
-                        <i class="fas fa-brain strength-icon-bullet"></i>
-                        <div class="strength-list-content">
-                            <h3>独自の発想と専門性</h3>
-                            <p>学術研究と現場実装の両輪で活動し、従来の枠にとらわれない解決策を提供します。</p>
+                        <h3>柔軟かつスピーディーな開発</h3>
+                        <p>少数精鋭チームならではのフットワークで、要望に迅速かつ的確に対応可能です。</p>
+                    </div>
+
+                    <div class="strength-card">
+                        <div class="strength-icon">
+                            <i class="fas fa-brain"></i>
                         </div>
-                    </li>
-                    <li class="strength-list-item">
-                        <i class="fas fa-check-circle strength-icon-bullet"></i>
-                        <div class="strength-list-content">
-                            <h3>高い知的能力と論理的思考力</h3>
-                            <p>42 TokyoやMensaでの経験を背景に、複雑な課題を論理的に整理し、最適なソリューションを設計できます。</p>
+                        <h3>独自の発想と専門性</h3>
+                        <p>学術研究と現場実装の両輪で活動し、従来の枠にとらわれない解決策を提供します。</p>
+                    </div>
+
+                    <div class="strength-card">
+                        <div class="strength-icon">
+                            <i class="fas fa-check-circle"></i>
                         </div>
-                    </li>
-                </ul>
+                        <h3>高い知的能力と論理的思考力</h3>
+                        <p>42 TokyoやMensaでの経験を背景に、複雑な課題を論理的に整理し、最適なソリューションを設計できます。</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="services" class="fade-in-section background-section" style="background-image: url('https://res.cloudinary.com/dagugihav/image/upload/v1757525302/blue-2618308_1280_djbovv.jpg');">
-            <div class="section-overlay"></div>
+        <section id="services" class="section services fade-in">
             <div class="container">
-                <h2 class="section-title-white">提供できる価値(ソリューション)</h2>
-                <div class="service-grid-new">
-                    <div class="service-item-new">
-                        <div class="service-icon-new-wrapper"><i class="fas fa-chart-line"></i></div>
+                <h2 class="section-title">提供できる価値</h2>
+                <p class="section-subtitle">最新技術と豊富な専門知識で、お客様のビジネスを次のステージへ</p>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
                         <h3>DX推進の支援</h3>
                         <p>業務フローのデジタル化を進め、効率的かつ透明性の高い仕組みを構築します。</p>
                     </div>
-                    <div class="service-item-new">
-                        <div class="service-icon-new-wrapper"><i class="fas fa-robot"></i></div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
                         <h3>AI導入による競争力強化</h3>
                         <p>最新のAI技術を活用し、顧客対応、自動化、データ活用などを高次元で実現します。</p>
                     </div>
-                    <div class="service-item-new">
-                        <div class="service-icon-new-wrapper"><i class="fas fa-sync-alt"></i></div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
                         <h3>業務自動化・効率化</h3>
                         <p>定型業務の自動化により、工数削減と人的リソースの最適化を実現します。</p>
                     </div>
-                    <div class="service-item-new">
-                        <div class="service-icon-new-wrapper"><i class="fas fa-tachometer-alt"></i></div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
                         <h3>スピード感ある開発・実装</h3>
                         <p>少数精鋭チームだからこそ可能な柔軟性とスピードで、ニーズに迅速対応します。</p>
                     </div>
-                    <div class="service-item-new">
-                        <div class="service-icon-new-wrapper"><i class="fas fa-wallet"></i></div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
                         <h3>業界トップクラスのコストパフォーマンス</h3>
                         <p>若手チームの強みを活かし、高品質なソリューションを業界でもリーズナブルな価格で提供します。</p>
                     </div>
@@ -160,48 +192,94 @@
             </div>
         </section>
 
-        <section id="projects" class="fade-in-section">
+        <section id="projects" class="section fade-in">
             <div class="container">
-                <h2>実績・導入事例</h2>
-                <div class="project-cards-wrapper">
+                <h2 class="section-title">実績・導入事例</h2>
+                <p class="section-subtitle">これまでに手がけた革新的なプロジェクトをご紹介します</p>
+                <div class="projects-grid">
                     <a href="project1.html" class="project-card">
-                        <div class="project-card-icon-wrapper"><i class="fas fa-file-invoice"></i></div>
-                        <div class="project-card-content">
-                            <h3>フォーム営業自動化ツール「Salesbot」</h3>
-                            <p>ボタンをクリックして放置するだけで稼働し、1端末あたり1日10,000件以上のフォーム営業を自動送信します。</p>
-                            <span class="project-card-link-text">詳細を見る <i class="fas fa-chevron-right"></i></span>
+                        <div class="project-icon">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <h3>フォーム営業自動化ツール「Salesbot」</h3>
+                        <p>ボタンをクリックして放置するだけで稼働し、1端末あたり1日10,000件以上のフォーム営業を自動送信します。</p>
+                        <div class="project-link">
+                            詳細を見る <i class="fas fa-arrow-right"></i>
                         </div>
                     </a>
+
                     <a href="project2.html" class="project-card">
-                        <div class="project-card-icon-wrapper"><i class="fas fa-comments"></i></div>
-                        <div class="project-card-content">
-                            <h3>ECサイト内AIチャットボット開発</h3>
-                            <p>ECサイトに届く問い合わせメールをAIで自動対応し、人的コストを大幅に削減します。</p>
-                            <span class="project-card-link-text">詳細を見る <i class="fas fa-chevron-right"></i></span>
+                        <div class="project-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>ECサイト内AIチャットボット開発</h3>
+                        <p>ECサイトに届く問い合わせメールをAIで自動対応し、人的コストを大幅に削減します。</p>
+                        <div class="project-link">
+                            詳細を見る <i class="fas fa-arrow-right"></i>
                         </div>
                     </a>
+
                     <a href="project3.html" class="project-card">
-                        <div class="project-card-icon-wrapper"><i class="fas fa-mobile-alt"></i></div>
-                        <div class="project-card-content">
-                            <h3>iOS音声チャットアプリ開発</h3>
-                            <p>高齢者の孤独感を軽減し、日常の安心感を提供する音声AIチャットアプリを正式リリースしました。</p>
-                            <span class="project-card-link-text">詳細を見る <i class="fas fa-chevron-right"></i></span>
+                        <div class="project-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>iOS音声チャットアプリ開発</h3>
+                        <p>高齢者の孤独感を軽減し、日常の安心感を提供する音声AIチャットアプリを正式リリースしました。</p>
+                        <div class="project-link">
+                            詳細を見る <i class="fas fa-arrow-right"></i>
                         </div>
                     </a>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="fade-in-section">
-            <div class="container contact-compact">
-                <h2>お問い合わせ</h2>
-                <p class="contact-description">ご質問やご相談がありましたら、お気軽にご連絡ください。お客様のあらゆる課題に対し、最適な解決策をご提案します。</p>
-                <ul class="contact-info">
-                    <li><i class="fas fa-building"></i> <strong>会社名:</strong> Inspire Up</li>
-                    <li><i class="fas fa-phone"></i> <strong>電話番号:</strong> <a href="tel:080-2342-4513">080-2342-4513</a></li>
-                    <li><i class="fas fa-envelope"></i> <strong>メールアドレス:</strong> <a href="mailto:inspireup.w.official@gmail.com">inspireup.w.official@gmail.com</a></li>
-                    <li><i class="fab fa-line"></i> <strong>公式LINE:</strong> <a href="https://lin.ee/zrudU0a" target="_blank" rel="noopener">https://lin.ee/zrudU0a</a></li>
-                </ul>
+        <section id="contact" class="section contact fade-in">
+            <div class="container">
+                <h2 class="section-title">お問い合わせ</h2>
+                <p class="section-subtitle">ご質問やご相談がありましたら、お気軽にご連絡ください</p>
+                <div class="contact-info">
+                    <div class="contact-grid">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>会社名</h4>
+                                <span>Inspire Up</span>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>電話番号</h4>
+                                <a href="tel:080-2342-4513">080-2342-4513</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>メールアドレス</h4>
+                                <a href="mailto:inspireup.w.official@gmail.com">inspireup.w.official@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-line"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>公式LINE</h4>
+                                <a href="https://lin.ee/zrudU0a" target="_blank" rel="noopener">お問い合わせはこちら</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
