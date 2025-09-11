@@ -32,6 +32,10 @@
     --font-size-base: 1.05rem;
     --font-size-small: 0.95rem;
     --font-size-large: 1.15rem;
+
+    /* RGB値の定義 (rgbaで使用するため) */
+    --color-tertiary-bg-rgb: 39, 58, 79;
+    --color-border-rgb: 255, 255, 255;
 }
 
 /* body要素のリセットと基本設定 */
@@ -447,20 +451,6 @@ p {
     transform: scale(1); /* ホバー時の拡大を削除 */
 }
 
-/* 画像キャプション削除により不要 */
-/* .image-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    padding: 10px 0;
-    margin: 0;
-    font-size: var(--font-size-small);
-    font-weight: 500;
-} */
-
 
 /* 私たちの強みセクション (#strengths) - スタイリッシュな箇条書き */
 #strengths {
@@ -677,20 +667,9 @@ p {
     font-size: var(--font-size-large);
 }
 
-/* contact-details は削除されたため不要 */
-/* .contact-details {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 60px;
-    max-width: 900px;
-    margin: 0 auto;
-} */
-
 .contact-info {
     list-style: none;
     padding: 0;
-    /* text-align: left; */ /* 中央寄せに変更 */
     display: inline-block; /* リストを中央寄せにするため */
     text-align: left; /* 各リスト項目は左寄せ */
     margin-top: 40px; /* 上部にスペース */
@@ -742,14 +721,6 @@ p {
 .contact-info a:hover::after {
     width: 100%;
 }
-
-/* お問い合わせ画像削除により不要 */
-/* .contact-image {
-    max-width: 400px;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px var(--color-shadow-heavy);
-} */
 
 
 /* ========================================= */
@@ -822,6 +793,8 @@ html { scroll-behavior: smooth; }
 /* ========================================= */
 /* 7. レスポンシブデザイン */
 /* ========================================= */
+
+/* 992px以下の画面 (タブレット横〜PCまでの中間) */
 @media (max-width: 992px) {
     .container {
         padding: 0 15px;
@@ -838,16 +811,19 @@ html { scroll-behavior: smooth; }
     }
     .hero-sub {
         font-size: 1rem;
+        max-width: 50ch; /* 読みやすい文字数に制限 */
+        margin-left: auto;
+        margin-right: auto;
     }
     .background-section {
         background-attachment: scroll; /* モバイルではパララックス無効 */
     }
 
-
     /* 会社情報セクション */
     .company-info-content {
         flex-direction: column;
         gap: 40px;
+        align-items: center; /* 中央寄せ */
     }
     .company-image-wrapper {
         order: -1; /* 画像を上に移動 */
@@ -869,6 +845,15 @@ html { scroll-behavior: smooth; }
     .company-section h3 {
         font-size: clamp(1.4rem, 3.5vw, 1.7rem);
     }
+    .company-section ul {
+        text-align: left; /* リストは左寄せを維持 */
+        padding-left: 0;
+        margin-top: 15px;
+    }
+    .company-section ul li {
+        padding-left: 25px;
+    }
+
     /* お問い合わせセクション */
     .contact-compact {
         text-align: center;
@@ -876,7 +861,12 @@ html { scroll-behavior: smooth; }
     .contact-info {
         text-align: left; /* 各リスト項目は左寄せを維持 */
         display: block; /* ブロック要素にして幅いっぱいに */
+        padding-left: 0;
     }
+    .contact-info li {
+        margin-bottom: 15px;
+    }
+
 
     /* 強みセクション */
     .strength-list {
@@ -884,11 +874,14 @@ html { scroll-behavior: smooth; }
         gap: 30px;
     }
     .strength-list-item {
-        padding: 18px;
-        gap: 20px;
+        flex-direction: column; /* アイコンとテキストを縦並びに */
+        text-align: center;
+        align-items: center;
+        padding: 20px;
     }
     .strength-icon-bullet {
-        font-size: 2.2rem;
+        font-size: 2.5rem; /* スマホで少し小さく */
+        margin-bottom: 10px; /* アイコンとテキストの間に余白 */
     }
     .strength-list-content h3 {
         font-size: clamp(1.2rem, 2.8vw, 1.5rem);
@@ -900,7 +893,7 @@ html { scroll-behavior: smooth; }
 
     /* 提供できる価値（ソリューション）セクション */
     .service-grid-new {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 小さな画面でも2列になるように調整 */
+        grid-template-columns: 1fr; /* スマホでは1列に */
         gap: 25px;
     }
     .service-item-new {
@@ -936,15 +929,17 @@ html { scroll-behavior: smooth; }
     }
 
 
-    /* パディング調整 */
+    /* 全体のパディング調整 */
     #hero {
         padding: calc(150px + var(--header-height)) 0 100px 0;
+        min-height: 70vh; /* 少し短く */
     }
     section {
         padding: 70px 0;
     }
 }
 
+/* 480px以下の画面 (スマホ縦向き) */
 @media (max-width: 480px) {
     .logo img {
         height: 60px; /* 小さい画面ではロゴを少し小さく */
@@ -964,9 +959,32 @@ html { scroll-behavior: smooth; }
     }
     .hero-heading {
         font-size: clamp(2rem, 7vw, 3rem);
+        margin-bottom: 25px;
     }
     .hero-sub {
-        font-size: var(--font-size-base);
+        font-size: 0.95rem; /* さらに小さく */
+        max-width: 40ch; /* より狭く */
+    }
+    
+    h2 {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+        margin-bottom: 40px;
+    }
+    h2::after {
+        margin-top: 15px;
+    }
+
+    .company-section h3 {
+        font-size: clamp(1.3rem, 4vw, 1.6rem);
+    }
+    .company-section ul li {
+        font-size: 0.95rem;
+    }
+
+
+    .contact-description {
+        font-size: 1rem;
+        margin-bottom: 40px;
     }
     .contact-info li {
         font-size: var(--font-size-base);
@@ -974,21 +992,72 @@ html { scroll-behavior: smooth; }
     .contact-info li strong {
         min-width: 90px;
     }
-    .service-grid-new {
-        grid-template-columns: 1fr; /* スマホでは1列に */
+    .contact-info li .fas,
+    .contact-info li .fab {
+        font-size: 1.1em;
+        margin-right: 12px;
+        width: 20px;
     }
+
+
+    /* 強みセクション (さらに調整) */
     .strength-list-item {
-        flex-direction: column; /* 強みも縦並びに */
-        text-align: center;
-        align-items: center;
+        padding: 15px;
+        gap: 15px;
     }
     .strength-icon-bullet {
-        margin-bottom: 10px;
+        font-size: 2.0rem;
     }
-}
+    .strength-list-content h3 {
+        font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+    }
+    .strength-list-content p {
+        font-size: 0.85rem;
+    }
 
-/* 変数RGB値の定義 (rgbaで使用するため) */
-:root {
-    --color-tertiary-bg-rgb: 39, 58, 79;
-    --color-border-rgb: 255, 255, 255;
+    /* サービス・実績セクション (さらに調整) */
+    .service-item-new {
+        padding: 20px;
+    }
+    .service-icon-new-wrapper {
+        width: 60px;
+        height: 60px;
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+    }
+    .service-item-new h3 {
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
+    }
+    .service-item-new p {
+        font-size: 0.85rem;
+    }
+
+    .project-card {
+        padding: 20px;
+    }
+    .project-card-icon-wrapper {
+        width: 45px;
+        height: 45px;
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+    .project-card-content h3 {
+        font-size: clamp(1.2rem, 3vw, 1.4rem);
+    }
+    .project-card-content p {
+        font-size: 0.85rem;
+    }
+    .project-card-link-text {
+        font-size: 0.9rem;
+    }
+
+
+    /* 全体のパディング調整 */
+    #hero {
+        padding: calc(100px + var(--header-height)) 0 80px 0;
+        min-height: 60vh;
+    }
+    section {
+        padding: 50px 0;
+    }
 }
